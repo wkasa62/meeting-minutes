@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>개발 회의록 — 셀프텍스</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Malgun Gothic', '맑은 고딕', -apple-system, sans-serif;
+      background: #eef1f6;
+      color: #2c3e50;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ══════════════════════════════
+       SITE HEADER
+    ══════════════════════════════ */
+    .site-header {
+      background: linear-gradient(135deg, #12294a 0%, #1f5080 100%);
+      color: white;
+      padding: 28px 32px 0;
+    }
+    .site-header-top {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .site-title { font-size: 20px; font-weight: 700; padding-bottom: 18px; }
+    .site-subtitle { font-size: 13px; opacity: 0.7; margin-top: 3px; }
+
+    /* ── Date Tabs (outer) ── */
+    .date-tabs {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      gap: 3px;
+      overflow-x: auto;
+      padding-bottom: 0;
+      margin-top: 16px;
+    }
+    .date-tab {
+      flex-shrink: 0;
+      padding: 10px 22px;
+      background: rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.75);
+      border: none;
+      border-radius: 8px 8px 0 0;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background .15s, color .15s;
+      position: relative;
+      bottom: -1px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .date-tab:hover { background: rgba(255,255,255,0.2); color: white; }
+    .date-tab.active {
+      background: #eef1f6;
+      color: #12294a;
+      border-top: 3px solid #4fc3f7;
+      padding-top: 8px;
+    }
+    .date-badge {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 1px 7px;
+      border-radius: 8px;
+    }
+    .date-tab.active .date-badge {
+      background: #4fc3f7;
+      color: #12294a;
+    }
+
+    /* ══════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════ */
+    .main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 20px 60px;
+    }
+
+    .date-panel { display: none; }
+    .date-panel.active { display: block; }
+
+    /* ── Meeting Card ── */
+    .meeting-card {
+      background: white;
+      border-radius: 0 12px 12px 12px;
+      box-shadow: 0 3px 14px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    /* meeting header */
+    .meeting-header {
+      background: linear-gradient(135deg, #1a3a5c 0%, #2d6a9f 100%);
+      color: white;
+      padding: 24px 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .mh-left { flex: 1; min-width: 200px; }
+    .mh-title { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+    .mh-meta { font-size: 13px; opacity: 0.85; }
+    .mh-sub { font-size: 12.5px; opacity: 0.7; margin-top: 6px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 8px; }
+
+    /* ── Inner Tabs ── */
+    .inner-tab-nav {
+      display: flex;
+      gap: 3px;
+      padding: 0 24px;
+      background: #f0f3f7;
+      border-bottom: 1px solid #e0e6ed;
+      overflow-x: auto;
+    }
+    .inner-tab-btn {
+      flex-shrink: 0;
+      padding: 11px 18px;
+      border: none;
+      background: transparent;
+      color: #7f8c9a;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+      border-bottom: 3px solid transparent;
+      margin-bottom: -1px;
+      transition: color .15s, border-color .15s;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .inner-tab-btn:hover { color: #2d6a9f; }
+    .inner-tab-btn.active {
+      color: #1a3a5c;
+      border-bottom-color: #2d6a9f;
+    }
+    .inner-tab-btn .idot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* ── Inner Panel ── */
+    .inner-panels { padding: 26px 28px; }
+    .inner-panel { display: none; }
+    .inner-panel.active { display: block; }
+
+    /* ══════════════════════════════
+       CONTENT COMPONENTS
+    ══════════════════════════════ */
+
+    /* Section */
+    .section {
+      border: 1px solid #e8ecf1;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+    .section:last-child { margin-bottom: 0; }
+    .section-hd {
+      padding: 13px 18px;
+      background: #f7f9fb;
+      border-bottom: 1px solid #e8ecf1;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .s-num {
+      width: 25px; height: 25px;
+      border-radius: 50%;
+      background: #2d6a9f;
+      color: white;
+      font-size: 11px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .section-hd h3 { font-size: 14.5px; font-weight: 700; color: #1a3a5c; }
+    .section-bd { padding: 16px 18px; }
+
+    /* Topic */
+    .topic { margin-bottom: 14px; }
+    .topic:last-child { margin-bottom: 0; }
+    .topic-title {
+      font-size: 13px; font-weight: 700; color: #2c3e50;
+      margin-bottom: 5px;
+      display: flex; align-items: center; gap: 7px;
+    }
+    .topic-title::before {
+      content: ""; display: inline-block;
+      width: 3px; height: 12px;
+      background: #2d6a9f; border-radius: 2px; flex-shrink: 0;
+    }
+    .topic-body { font-size: 13px; color: #444; padding-left: 10px; }
+    .topic-body ul { list-style: none; margin-top: 4px; display: flex; flex-direction: column; gap: 3px; }
+    .topic-body ul li { padding-left: 13px; position: relative; }
+    .topic-body ul li::before { content: "·"; position: absolute; left: 2px; color: #2d6a9f; font-weight: 700; }
+
+    /* Decision */
+    .decision {
+      background: #eaf4fb; border: 1px solid #aed6f1;
+      border-left: 4px solid #2980b9; border-radius: 6px;
+      padding: 10px 14px; font-size: 13px; color: #1a5276; margin-top: 9px;
+    }
+    .decision strong { color: #1a3a5c; }
+
+    /* Issue */
+    .issue-box {
+      background: #fdf3f3; border: 1px solid #f5c6c6;
+      border-left: 4px solid #e74c3c; border-radius: 6px;
+      padding: 10px 14px; font-size: 13px; color: #922b21; margin-top: 9px;
+    }
+
+    /* Note */
+    .note {
+      background: #fffbf0; border: 1px solid #fce8a6;
+      border-left: 4px solid #f0c040; border-radius: 6px;
+      padding: 10px 14px; font-size: 13px; color: #7d6608; margin-top: 9px;
+    }
+
+    /* Table */
+    table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 7px; }
+    th { background: #2d6a9f; color: white; padding: 8px 12px; text-align: left; font-weight: 600; }
+    td { padding: 8px 12px; border-bottom: 1px solid #ecf0f1; vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:nth-child(even) td { background: #f8fafc; }
+
+    /* Badges */
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; }
+    .badge.remove { background: #fde8e8; color: #c0392b; }
+    .badge.change { background: #fef3e2; color: #d35400; }
+    .badge.keep   { background: #e8f8e8; color: #1e8449; }
+
+    /* Tags */
+    .tag {
+      display: inline-block; font-size: 10.5px; font-weight: 700;
+      padding: 2px 7px; border-radius: 9px; white-space: nowrap; color: white;
+    }
+    .tag.red    { background: #e74c3c; }
+    .tag.blue   { background: #2980b9; }
+    .tag.green  { background: #27ae60; }
+    .tag.purple { background: #8e44ad; }
+    .tag.orange { background: #e67e22; }
+    .tag.gray   { background: #7f8c8d; }
+
+    /* Action Card */
+    .action-card {
+      display: flex; align-items: flex-start; gap: 11px;
+      padding: 12px 14px; border: 1px solid #e8ecf1;
+      border-radius: 8px; margin-bottom: 9px; background: #fafbfc;
+    }
+    .action-card:last-child { margin-bottom: 0; }
+    .ac-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .ac-title { font-size: 13px; font-weight: 700; color: #1a3a5c; margin-bottom: 3px; }
+    .ac-desc { font-size: 12.5px; color: #555; }
+    .ac-desc ul { list-style: none; margin-top: 3px; display: flex; flex-direction: column; gap: 3px; }
+    .ac-desc ul li { padding-left: 13px; position: relative; }
+    .ac-desc ul li::before { content: "·"; position: absolute; left: 2px; color: #2980b9; font-weight: 700; }
+
+    /* Plan Card */
+    .plan-card {
+      border-left: 4px solid #27ae60; padding: 11px 14px;
+      background: #f4fbf6; border-radius: 0 8px 8px 0; margin-bottom: 10px;
+    }
+    .plan-card:last-child { margin-bottom: 0; }
+    .pc-label { font-size: 11px; font-weight: 700; color: #1e8449; margin-bottom: 3px; }
+    .pc-title { font-size: 13px; font-weight: 700; color: #1a3a5c; margin-bottom: 3px; }
+    .pc-desc { font-size: 12.5px; color: #444; }
+    .pc-desc ul { list-style: none; margin-top: 4px; display: flex; flex-direction: column; gap: 3px; }
+    .pc-desc ul li { padding-left: 13px; position: relative; }
+    .pc-desc ul li::before { content: "·"; position: absolute; left: 2px; color: #27ae60; font-weight: 700; }
+
+    /* Other Card */
+    .other-card {
+      border: 1px solid #e8ecf1; border-left: 4px solid #8e44ad;
+      border-radius: 0 8px 8px 0; padding: 11px 14px;
+      margin-bottom: 10px; background: #faf8fc;
+    }
+    .other-card:last-child { margin-bottom: 0; }
+    .oc-title { font-size: 13px; font-weight: 700; color: #1a3a5c; margin-bottom: 4px; }
+    .oc-body { font-size: 12.5px; color: #444; }
+    .oc-body ul { list-style: none; margin-top: 3px; display: flex; flex-direction: column; gap: 3px; }
+    .oc-body ul li { padding-left: 13px; position: relative; }
+    .oc-body ul li::before { content: "·"; position: absolute; left: 2px; color: #8e44ad; font-weight: 700; }
+
+    /* Flow */
+    .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; margin: 7px 0; font-size: 12.5px; }
+    .flow-step { background: #eaf4fb; border: 1px solid #aed6f1; border-radius: 5px; padding: 4px 10px; font-size: 12.5px; color: #1a5276; font-weight: 600; }
+    .flow-arrow { color: #2980b9; font-size: 14px; }
+
+    /* Next meeting */
+    .next-meeting {
+      background: linear-gradient(135deg, #27ae60, #1e8449);
+      color: white; border-radius: 8px; padding: 16px 20px;
+      margin-top: 18px; display: flex; align-items: center; gap: 12px;
+    }
+    .nm-icon { font-size: 24px; }
+    .next-meeting h3 { font-size: 13.5px; font-weight: 700; margin-bottom: 2px; }
+    .next-meeting p { font-size: 12.5px; opacity: 0.9; }
+
+    .divider { height: 1px; background: #ecf0f1; margin: 12px 0; }
+
+    /* Footer */
+    .footer {
+      text-align: center; color: #aaa; font-size: 12px;
+      margin-top: 30px; padding-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ SITE HEADER + DATE TABS ══ -->
+<div class="site-header">
+  <div class="site-header-top">
+    <div>
+      <div class="site-title">셀프텍스 개발 회의록</div>
+      <div class="site-subtitle">날짜 탭을 선택하세요</div>
+    </div>
+  </div>
+  <div class="date-tabs">
+    <button class="date-tab active" onclick="switchDate('d0310a')">
+      📅 3월 10일 <span class="date-badge">①오전</span>
+    </button>
+    <button class="date-tab" onclick="switchDate('d0310b')">
+      📅 3월 10일 <span class="date-badge">②오후</span>
+    </button>
+    <!-- 추가 날짜는 여기에 계속 붙여넣기 -->
+  </div>
+</div>
+
+<!-- ══ MAIN ══ -->
+<div class="main">
+
+  <!-- ══════════════════════════════════════
+       날짜: 3월 10일 ① 오전
+  ══════════════════════════════════════ -->
+  <div id="date-d0310a" class="date-panel active">
+    <div class="meeting-card">
+
+      <div class="meeting-header">
+        <div class="mh-left">
+          <div class="mh-title">셀프텍스 개발 회의 — 오전</div>
+          <div class="mh-meta">📅 2026년 3월 10일 (오전)</div>
+          <div class="mh-sub">계정과목 정리 · AI 분류 개선 · 시스템 통합 방향</div>
+        </div>
+      </div>
+
+      <div class="inner-tab-nav">
+        <button class="inner-tab-btn active" onclick="switchInner('d0310a','decided')">
+          <span class="idot" style="background:#e74c3c"></span>결정 사항
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0310a','plan')">
+          <span class="idot" style="background:#27ae60"></span>향후 계획
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0310a','selftax')">
+          <span class="idot" style="background:#2980b9"></span>셀프텍스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0310a','wontax')">
+          <span class="idot" style="background:#8e44ad"></span>원택스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0310a','other')">
+          <span class="idot" style="background:#7f8c8d"></span>기타 의견
+        </button>
+      </div>
+
+      <div class="inner-panels">
+
+        <!-- 결정 사항 -->
+        <div id="d0310a-decided" class="inner-panel active">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>즉시 실행 — 오늘 처리</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">✂️</div>
+                <div>
+                  <div class="ac-title"><span class="tag red">프롬프트</span>&nbsp; Gemini 계정과목 선택지 4개 제거</div>
+                  <div class="ac-desc">급여 · 이자비용 · 기부금 · 감가상각비 → 카드 매입에서 발생 불가, 선택지에서 삭제</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🔀</div>
+                <div>
+                  <div class="ac-title"><span class="tag blue">코딩</span>&nbsp; 세금계산서 계정과목 매핑 처리</div>
+                  <div class="ac-desc">접대비 → 기타 / 사업무관 → 기타 (코딩으로 처리)</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🚫</div>
+                <div>
+                  <div class="ac-title"><span class="tag blue">UI</span>&nbsp; 일괄변경 팝업 다이얼로그 제거</div>
+                  <div class="ac-desc">계정과목·공제구분 일괄 변경 즉시 적용 방식으로 변경</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">⬆️</div>
+                <div>
+                  <div class="ac-title"><span class="tag blue">UI</span>&nbsp; 사업무관 항목 드롭다운 최상단 배치</div>
+                  <div class="ac-desc">사용자가 직접 선택하기 쉽게 목록 맨 위로 이동</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🖥️</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">서버</span>&nbsp; 실서버 반영 작업</div>
+                  <div class="ac-desc">DB 정합성 + 계정/Gemini 세팅 → 약 1일 소요. 공지 없이 진행 가능</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e67e22">✓</div><h3>검토 후 결정된 사항</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">📋</div>
+                <div>
+                  <div class="ac-title">업종별 Gemini 자동분류 — 적용 안 함</div>
+                  <div class="ac-desc">오류 증가·재분석 비용 과다로 기각. 사업관련성은 사용자 직접 판단.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">💬</div>
+                <div>
+                  <div class="ac-title">사업관련성 안내 문구 추가 (채택)</div>
+                  <div class="ac-desc">"사업용 카드 매입 내역이 자동 분류되었습니다. 사업 관련성을 확인 후 신고해 주세요."</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🔗</div>
+                <div>
+                  <div class="ac-title">원택스 통합 — 소득세 완성 후 후순위로</div>
+                  <div class="ac-desc">원택스는 내부 업무용("텍스오피스")으로 별도 유지. 신규 기능은 셀프텍스 표준으로 개발.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 향후 계획 -->
+        <div id="d0310a-plan" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">→</div><h3>단기 계획</h3></div>
+            <div class="section-bd">
+              <div class="plan-card">
+                <div class="pc-label">1순위</div>
+                <div class="pc-title">소득세(종합소득세) 기능 설계</div>
+                <div class="pc-desc">오후 회의에서 계정과목 연동, 비용 처리 로직, UI 구성 상세 논의 예정</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#f39c12;background:#fffbf2">
+                <div class="pc-label" style="color:#d68910">2순위</div>
+                <div class="pc-title">사업관련성 확인 팝업 / 안내 UI 구현</div>
+                <div class="pc-desc">부동산임대업·운수업 등 고위험 업종 대상 신고 전 확인 안내 문구 삽입</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#e74c3c;background:#fdf4f4">
+                <div class="pc-label" style="color:#c0392b">3순위</div>
+                <div class="pc-title">셀프텍스 실서버 안정화 및 광고 준비</div>
+                <div class="pc-desc">부가세 2월분 신고 기간 맞춰 실서버 반영 완료 후 광고 진행 검토</div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">→</div><h3>중장기 계획</h3></div>
+            <div class="section-bd">
+              <div class="plan-card" style="border-left-color:#8e44ad;background:#faf6fd">
+                <div class="pc-label" style="color:#6c3483">원택스 통합</div>
+                <div class="pc-title">셀프텍스 ↔ 원택스 마이그레이션</div>
+                <div class="pc-desc">DB 정합 + 프로세스 통합. 예상 소요: 3~4주. 소득세 완성 이후 착수.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#2980b9;background:#eef6fd">
+                <div class="pc-label" style="color:#1a5276">B2B</div>
+                <div class="pc-title">세무사 사무실 전용 버전 검토</div>
+                <div class="pc-desc">설명회에서 수요 확인. 세무대리인 인증 방식, 거래처별 데이터 분리, 브랜드 커스터마이징 필요.</div>
+              </div>
+            </div>
+          </div>
+          <div class="next-meeting">
+            <div class="nm-icon">📋</div>
+            <div>
+              <h3>오후 회의 예정</h3>
+              <p>주제: <strong>소득세(종합소득세) 기능 설계</strong> — 계정과목 연동 · 비용 처리 로직 · UI 구성</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 셀프텍스 -->
+        <div id="d0310a-selftax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num">1</div><h3>계정과목 정리 — Gemini 분류 대상 (23개)</h3></div>
+            <div class="section-bd">
+              <table>
+                <thead><tr><th>계정과목</th><th>처리</th><th>사유</th></tr></thead>
+                <tbody>
+                  <tr><td>급여</td><td><span class="badge remove">제거</span></td><td>카드 매입 발생 불가</td></tr>
+                  <tr><td>이자비용</td><td><span class="badge remove">제거</span></td><td>카드 매입 발생 불가</td></tr>
+                  <tr><td>기부금</td><td><span class="badge remove">제거</span></td><td>카드 매입 발생 불가</td></tr>
+                  <tr><td>감가상각비</td><td><span class="badge remove">제거</span></td><td>카드 매입 발생 불가</td></tr>
+                  <tr><td>접대비 (세금계산서)</td><td><span class="badge change">기타로 변경</span></td><td>세금계산서에 접대비 항목 없음 → 코딩 처리</td></tr>
+                  <tr><td>사업무관 (세금계산서)</td><td><span class="badge change">기타로 변경</span></td><td>세금계산서 불필요 → 코딩 처리</td></tr>
+                </tbody>
+              </table>
+              <div class="decision"><strong>결정:</strong> 제거 후 잔여 23개. 가스/수도요금 등은 묶어 표시하되 Gemini에는 개별 항목 전달.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num">2</div><h3>세금계산서 상세 — 일괄/개별 변경 기능 (신규)</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">추가된 기능</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>상세 화면 일괄 변경 → 해당 기간 내 매입 비용 전체 반영</li>
+                    <li>상단 합계 화면에는 영향 없음 (독립 작동)</li>
+                    <li>비용구분 · 매입구분 각각 개별 변경 가능</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="decision"><strong>결정:</strong> 팝업 제거 후 즉시 적용 방식으로 변경.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num">3</div><h3>사업관련성 판단 — 업종별 자동화 검토 결과</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">업종별 추가 케이스 기각 이유</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>Gemini 조건값 증가 → 분류 오류율 증가</li>
+                    <li>재분석 시 전체 데이터 재처리 필요 (100만 건+ 심각)</li>
+                    <li>사업관련성은 주관적 판단 영역 — 자동화 부적합</li>
+                    <li>쿠팡 등 플랫폼 매입 품목 식별 불가</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="decision"><strong>결정:</strong> 사업무관 드롭다운 최상단 배치. 신고 전 안내 문구로 주의 환기.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 원택스 -->
+        <div id="d0310a-wontax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">1</div><h3>셀프텍스 + 원택스 통합 검토</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">시스템 구조 차이</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>셀프텍스: 카카오 간편 로그인, 실시간 처리</li>
+                    <li>원택스: 세무대리인 인증서 기반, 자체 배치</li>
+                    <li>DB 구조 및 인증 방식이 근본적으로 상이 → 단순 병합 불가</li>
+                    <li>마이그레이션 + 통합 예상 소요: 3~4주</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="decision"><strong>결정:</strong> 소득세 완성 이후 후순위. 원택스는 내부 "텍스오피스"로 유지. 신규 기능은 셀프텍스 표준 개발.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">2</div><h3>세무사 B2B 수요 확인</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">설명회 확인 내용</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>세무사들이 거래처에 셀프텍스 활용을 강하게 원함</li>
+                    <li>부가세 신고 원가 절감 목적, 설명회 당일 도입 문의 발생</li>
+                    <li>필요 추가 개발: 인증서 분리, 데이터 분리, 로고 커스터마이징</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="decision"><strong>방향:</strong> 소득세 우선. B2B는 중장기 로드맵으로 관리.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 기타 의견 -->
+        <div id="d0310a-other" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#7f8c8d">?</div><h3>기타 논의 내용</h3></div>
+            <div class="section-bd">
+              <div class="other-card">
+                <div class="oc-title">OX 방식 vs 공제/불공제 방식 전환 배경</div>
+                <div class="oc-body">초기 OX 방식 → 미등록 카드 적용 불가·차량 공제 판단 문제로 공제/불공제 방식으로 전환.
+                  <ul><li>OX 장점: 차량·소득세 자동 연동</li><li>OX 한계: 미등록 카드에 적용 불가</li></ul>
+                </div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">Gemini 조건값 증가 시 오류 패턴</div>
+                <div class="oc-body">조건값이 많을수록 오류율 증가 실험적 확인. 계정과목 선택지 축소가 성능에 직접 영향.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">부동산임대업 사업관련성 리스크</div>
+                <div class="oc-body">임대업 사장님의 일반 구매(이마트·쿠팡 등)가 자동 공제로 처리될 위험. 팝업 안내로 대응 결정.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">동종업계 공제비율 비교 정보 제공 아이디어</div>
+                <div class="oc-body">"동종 업계 대비 공제 비율이 높습니다. 확인 후 신고해 주세요." 형태로 사용자 주의 유도.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /inner-panels -->
+    </div><!-- /meeting-card -->
+  </div><!-- /date-d0310a -->
+
+
+  <!-- ══════════════════════════════════════
+       날짜: 3월 10일 ② 오후
+  ══════════════════════════════════════ -->
+  <div id="date-d0310b" class="date-panel">
+    <div class="meeting-card">
+
+      <div class="meeting-header">
+        <div class="mh-left">
+          <div class="mh-title">셀프텍스 개발 회의 — 오후</div>
+          <div class="mh-meta">📅 2026년 3월 10일 (오후)</div>
+          <div class="mh-sub">종합소득세 신고 시스템 설계 · 프리랜서 처리 · 가입 프로세스 변경</div>
+        </div>
+      </div>
+
+      <div class="inner-tab-nav">
+        <button class="inner-tab-btn active" onclick="switchInner('d0310b','decided')">
+          <span class="idot" style="background:#e74c3c"></span>결정 사항
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0310b','plan')">
+          <span class="idot" style="background:#27ae60"></span>향후 계획
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0310b','selftax')">
+          <span class="idot" style="background:#2980b9"></span>셀프텍스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0310b','wontax')">
+          <span class="idot" style="background:#8e44ad"></span>원택스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0310b','other')">
+          <span class="idot" style="background:#7f8c8d"></span>기타 의견
+        </button>
+      </div>
+
+      <div class="inner-panels">
+
+        <!-- 결정 사항 -->
+        <div id="d0310b-decided" class="inner-panel active">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>즉시 실행 — 개발 반영 필요</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">👥</div>
+                <div>
+                  <div class="ac-title"><span class="tag red">가입</span>&nbsp; 사업자 전체 자동 등록으로 변경</div>
+                  <div class="ac-desc">가입 시 2025년 폐업자 포함 전체 사업자 자동 생성. 기존 가입자는 1회 업데이트 필요.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">📊</div>
+                <div>
+                  <div class="ac-title"><span class="tag blue">UI</span>&nbsp; 소득세 신고 화면: 세액 총계 우선 표시</div>
+                  <div class="ac-desc">A안(단순경비율) vs B안(장부) 세액 비교 후 유리한 것 추천. 상세는 아코디언 방식.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🔢</div>
+                <div>
+                  <div class="ac-title"><span class="tag blue">데이터</span>&nbsp; 프리랜서 소득 — 업종 코드별 합산 처리</div>
+                  <div class="ac-desc">940909 등 코드별 합산 후 각 1개 레코드 생성. 5월 신고 안내문 기준으로 DB 자동 생성.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">💰</div>
+                <div>
+                  <div class="ac-title"><span class="tag orange">계산</span>&nbsp; 비용 금액: 공급가액 / 공급대가 구분 적용</div>
+                  <div class="ac-desc">부가세 공제 항목 → 공급가액. 불공제·간이과세자·3.3% → 공급대가로 소득세 반영.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e67e22">✓</div><h3>검토 후 결정된 사항</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">📋</div>
+                <div>
+                  <div class="ac-title">기준경비율 — 업종 코드 기준, 전년도율 디폴트</div>
+                  <div class="ac-desc">초기 안내문 없을 때는 24년도율 적용. 업종 코드에 따라 자동 매핑.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🗓️</div>
+                <div>
+                  <div class="ac-title">종합소득세 기능 — 5월 1일 오픈 기준 설계</div>
+                  <div class="ac-desc">신고 안내문은 5월 1일부터 제공. 프리랜서 DB 생성도 그때부터 가능.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">📂</div>
+                <div>
+                  <div class="ac-title">미등록 카드 비용 — 기존 양식 그대로 (프리랜서 동일)</div>
+                  <div class="ac-desc">프리랜서도 기존 미등록 카드 업로드 양식 활용. 세금계산서·현금영수증도 동일 처리.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 향후 계획 -->
+        <div id="d0310b-plan" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">→</div><h3>단기 계획 (5월 전)</h3></div>
+            <div class="section-bd">
+              <div class="plan-card">
+                <div class="pc-label">1순위</div>
+                <div class="pc-title">소득세 신고 UI 및 로직 상세 설계</div>
+                <div class="pc-desc">기본공제 우선 세팅, 원천징수 자동 연동, 보험모집인 소득률 이중 구간 처리.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#f39c12;background:#fffbf2">
+                <div class="pc-label" style="color:#d68910">2순위</div>
+                <div class="pc-title">가입 프로세스 변경 — 전체 사업자 자동 생성</div>
+                <div class="pc-desc">신규 가입자: 자동 전체 등록. 기존 가입자: 1회 일괄 업데이트.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#e74c3c;background:#fdf4f4">
+                <div class="pc-label" style="color:#c0392b">3순위</div>
+                <div class="pc-title">프리랜서 DB 생성 로직 개발</div>
+                <div class="pc-desc">5월 신고 안내문 수신 시 코드별 자동 생성. 유니크 키 자동 부여.</div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">→</div><h3>중장기 계획</h3></div>
+            <div class="section-bd">
+              <div class="plan-card" style="border-left-color:#8e44ad;background:#faf6fd">
+                <div class="pc-label" style="color:#6c3483">중기</div>
+                <div class="pc-title">소득 종류 확장 — 연금소득·기타소득 입력 지원</div>
+                <div class="pc-desc">현재는 사업소득+프리랜서 위주. 추가 소득 종류는 직접 입력 방식으로 추가.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#e67e22;background:#fef9f2">
+                <div class="pc-label" style="color:#d35400">중기</div>
+                <div class="pc-title">데이터 자산화 — 상호 검색 API 서비스 검토</div>
+                <div class="pc-desc">누적 업체 데이터를 API로 제공. 유사 서비스 2~3개뿐 → 경쟁력 확보 가능.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#2980b9;background:#eef6fd">
+                <div class="pc-label" style="color:#1a5276">중기</div>
+                <div class="pc-title">콘텐츠/SEO 전략 — 셀프텍스·차설세무사 블로그 운영</div>
+                <div class="pc-desc">AI 활용 콘텐츠 자동 생성 실험. 셀프텍스 먼저 운영 후 차설세무사 트래픽 보완.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 셀프텍스 -->
+        <div id="d0310b-selftax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num">1</div><h3>종합소득세 신고 UI 설계</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">A/B 방식 비교 표시</div>
+                <div class="topic-body">단순경비율(추계) vs 장부신고 세액 각각 계산. 유리한 것 추천 후 신고.
+                  <ul><li>총 세액만 먼저 표시 → 상세는 아코디언</li><li>기본공제는 기본값 세팅 후 추가 공제 입력</li><li>보험모집인 등: 4천만 원 기준 소득률 분기 처리</li></ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num">2</div><h3>프리랜서(인적용역) 소득 처리 구조</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">처리 흐름</div>
+                <div class="topic-body">
+                  <div class="flow">
+                    <div class="flow-step">5월 신고 안내문</div><div class="flow-arrow">→</div>
+                    <div class="flow-step">코드 확인</div><div class="flow-arrow">→</div>
+                    <div class="flow-step">코드별 DB 생성</div><div class="flow-arrow">→</div>
+                    <div class="flow-step">미등록 카드 매핑</div><div class="flow-arrow">→</div>
+                    <div class="flow-step">기준경비율 계산</div>
+                  </div>
+                </div>
+              </div>
+              <div class="note">사업자 + 프리랜서 동시 존재 가능. 연금·기타소득은 직접 입력 방식 별도 처리.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num">3</div><h3>가입 프로세스 변경</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">현행 vs 변경</div>
+                <div class="topic-body">
+                  <ul><li><strong>현행:</strong> 사용자가 사업자 직접 선택 등록</li><li><strong>변경:</strong> 가입 시 전체 사업자(+2025년 폐업자) 자동 생성</li></ul>
+                </div>
+              </div>
+              <div class="decision"><strong>결정:</strong> 기존 가입자는 1회 일괄 업데이트로 누락 사업자 추가 생성 처리.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 원택스 -->
+        <div id="d0310b-wontax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">–</div><h3>원택스 관련 논의</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">오후 회의 결론</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>원택스 통합 별도 논의 없음 — 오전 회의 결정 사항 유지</li>
+                    <li>소득세 기능 완성 후 통합 검토</li>
+                    <li>신규 소득세 기능은 셀프텍스 표준으로 개발</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note">오전 회의 원택스 탭 내용 참고 (3월 10일 ① 탭)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 기타 의견 -->
+        <div id="d0310b-other" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#7f8c8d">?</div><h3>기타 논의 내용</h3></div>
+            <div class="section-bd">
+              <div class="other-card">
+                <div class="oc-title">부가세가 종합소득세보다 실제로 더 복잡하다</div>
+                <div class="oc-body">소득세 로직을 보다 보니 오히려 부가세가 훨씬 복잡했다는 회고. 기획보다 실행 후 개선 방식이 더 효율적이라는 결론.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">Gemini 업종 분류 — 프롬프트 설계 효과 확인</div>
+                <div class="oc-body">구조화된 선택지 프롬프트가 일관된 결과값 도출. 조건 많을수록 변수 증가 → 선택지 축소가 핵심.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">수작업 대비 AI 처리 효율</div>
+                <div class="oc-body">22만 9880건 데이터를 수작업 분류는 사실상 불가능. AI 없이는 현재 서비스 구조 자체가 성립 안 됨.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">콘텐츠 전략 — 세무통 대비 노출 경쟁</div>
+                <div class="oc-body">GPT는 셀프텍스 미노출(정책 이슈). Gemini는 상대적 우호적. 콘텐츠 양·질로 승부.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">누적 데이터 자산화 잠재 가치</div>
+                <div class="oc-body">업체 상호·업종 데이터 API 서비스 잠재력. 현재 유사 서비스 2~3개뿐 → 수백만 건 확보 시 차별화.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /inner-panels -->
+    </div><!-- /meeting-card -->
+  </div><!-- /date-d0310b -->
+
+  <div class="footer">셀프텍스 개발 회의록 · 자동 생성</div>
+
+</div><!-- /main -->
+
+<script>
+  function switchDate(dateId) {
+    document.querySelectorAll('.date-tab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.date-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('date-' + dateId).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  function switchInner(dateId, tabName) {
+    // 버튼
+    const nav = document.getElementById('date-' + dateId).querySelector('.inner-tab-nav');
+    nav.querySelectorAll('.inner-tab-btn').forEach(b => b.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    // 패널
+    const panels = document.getElementById('date-' + dateId).querySelector('.inner-panels');
+    panels.querySelectorAll('.inner-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(dateId + '-' + tabName).classList.add('active');
+  }
+</script>
+
+</body>
+</html>
