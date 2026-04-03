@@ -347,6 +347,9 @@
     <button class="date-tab" onclick="switchDate('d0324')">
       📅 3월 24일 <span class="date-badge">오전</span>
     </button>
+    <button class="date-tab" onclick="switchDate('d0327')">
+      📅 3월 27일 <span class="date-badge">오후</span>
+    </button>
     <!-- 추가 날짜는 여기에 계속 붙여넣기 -->
   </div>
 </div>
@@ -1701,6 +1704,246 @@
       </div><!-- /inner-panels -->
     </div><!-- /meeting-card -->
   </div><!-- /date-d0324 -->
+
+  <!-- ══════════════════════════════════════
+       날짜: 3월 27일 (오후)
+  ══════════════════════════════════════ -->
+  <div id="date-d0327" class="date-panel">
+    <div class="meeting-card">
+
+      <div class="meeting-header">
+        <div class="mh-left">
+          <div class="mh-title">셀프텍스 개발 회의 — 오후</div>
+          <div class="mh-meta">📅 2026년 3월 27일 (오후)</div>
+          <div class="mh-sub">종소세 신고 프로세스 확정 · 비즈니스 방향 전환 · 세무대리인 방식 · 지방세</div>
+        </div>
+      </div>
+
+      <div class="inner-tab-nav">
+        <button class="inner-tab-btn active" onclick="switchInner('d0327','decided')">
+          <span class="idot" style="background:#e74c3c"></span>결정 사항
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0327','plan')">
+          <span class="idot" style="background:#27ae60"></span>향후 계획
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0327','selftax')">
+          <span class="idot" style="background:#2980b9"></span>셀프텍스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0327','wontax')">
+          <span class="idot" style="background:#8e44ad"></span>원택스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0327','other')">
+          <span class="idot" style="background:#7f8c8d"></span>기타 의견
+        </button>
+      </div>
+
+      <div class="inner-panels">
+
+        <!-- 결정 사항 -->
+        <div id="d0327-decided" class="inner-panel active">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>핵심 결정 — 비즈니스 방향 전환</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🔄</div>
+                <div>
+                  <div class="ac-title"><span class="tag red">전략</span>&nbsp; 3만원 자가신고 → 세무법인 기장·조정 서비스로 전환</div>
+                  <div class="ac-desc">셀프텍스 셀프신고 방식보다 "세무법인에서 기장료 4~5만원"이 훨씬 경쟁력 있음. 세무사·회계사 자격 장점을 활용하는 방향으로 전환.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🏢</div>
+                <div>
+                  <div class="ac-title"><span class="tag red">브랜드</span>&nbsp; 세무법인 명의로 신고·영업 — 우리 인증서 사용</div>
+                  <div class="ac-desc">조정료 수취를 위해 세무대리인 명의 필수. 광고도 "셀프텍스" 대신 "세무법인에서 기장+신고"로 접근.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e67e22">✓</div><h3>종소세 신고 프로세스 확정</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">📋</div>
+                <div>
+                  <div class="ac-title">신고 프로세스 6단계</div>
+                  <div class="ac-desc">
+                    <ul>
+                      <li>① 사용자 신청하기 클릭 → 데이터 위하고 업로드</li>
+                      <li>② 담당자 검토 → 관리자 페이지에서 세액·수수료 입력</li>
+                      <li>③ 사용자에게 세액+조정료 안내</li>
+                      <li>④ 사용자 결제 완료</li>
+                      <li>⑤ 세무대리인(우리) 인증으로 전자파일 신고</li>
+                      <li>⑥ 납부서 발급 및 전달</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🖥️</div>
+                <div>
+                  <div class="ac-title">종소세 화면 간소화 — 계정과목 숨기기</div>
+                  <div class="ac-desc">계정과목 상세 표시 제거. "신용카드 비용 얼마, 현금영수증 비용 얼마" 통합 표시. 세무 처리 방식 노출 최소화.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">📊</div>
+                <div>
+                  <div class="ac-title">과거 데이터 — 신고 도움 서비스 2년치 표시</div>
+                  <div class="ac-desc">세액 직접 표시는 어려우니 신고 도움 서비스(전년도·재작년) 2년치 데이터로 소득금액·비용 요약 표시.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 향후 계획 -->
+        <div id="d0327-plan" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">→</div><h3>단기 계획</h3></div>
+            <div class="section-bd">
+              <div class="plan-card">
+                <div class="pc-label">1순위</div>
+                <div class="pc-title">주말 중 종소세 화면 기획 재설계</div>
+                <div class="pc-desc">간소화된 화면 구조 기획. 신고 신청 페이지 + 세액 안내 + 결제 플로우 재설계.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#f39c12;background:#fffbf2">
+                <div class="pc-label" style="color:#d68910">2순위</div>
+                <div class="pc-title">더존(위하고) 자동화 — M8 검토</div>
+                <div class="pc-desc">더존 API 없음. M8(자동화 도구)으로 위하고 자동 로그인·파일 업로드 가능 여부 검토. 위하고 ID/PW 제공 필요.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#e74c3c;background:#fdf4f4">
+                <div class="pc-label" style="color:#c0392b">3순위</div>
+                <div class="pc-title">인포텍 위택스 API 계약 검토 (50만원)</div>
+                <div class="pc-desc">홈택스+위택스 전자파일 2개를 우리 인증서로 신고하는 방식 vs 인포텍 계약 방식 비교 후 결정.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#2980b9;background:#eef6fd">
+                <div class="pc-label" style="color:#1a5276">SEO</div>
+                <div class="pc-title">"찾아줘 세무사" LLM 노출 작업</div>
+                <div class="pc-desc">나무위키·각종 플랫폼에 차설세무사 정의 등록. 3~4주 작업으로 GPT·Perplexity 상위 노출 목표. 다음 주 별도 미팅.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 셀프텍스 -->
+        <div id="d0327-selftax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num">1</div><h3>종소세 신고 흐름도</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">사용자 → 관리자 → 신고 프로세스</div>
+                <div class="topic-body">
+                  <div class="flow">
+                    <div class="flow-step">신청하기</div><div class="flow-arrow">→</div>
+                    <div class="flow-step">위하고 업로드</div><div class="flow-arrow">→</div>
+                    <div class="flow-step">담당자 검토</div><div class="flow-arrow">→</div>
+                    <div class="flow-step">세액+수수료 안내</div><div class="flow-arrow">→</div>
+                    <div class="flow-step">결제</div><div class="flow-arrow">→</div>
+                    <div class="flow-step">전자신고</div>
+                  </div>
+                </div>
+              </div>
+              <div class="note">전자파일은 위하고에서 생성 → 관리자 페이지에서 업로드 → 우리 인증서로 홈택스·위택스 신고. 사용자는 결제 전 세액 확인 후 동의.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num">2</div><h3>화면 간소화 방향</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">변경 전 → 변경 후</div>
+                <div class="topic-body">
+                  <ul>
+                    <li><strong>변경 전:</strong> 계정과목별 상세 분류 표시</li>
+                    <li><strong>변경 후:</strong> 신용카드 비용 / 현금영수증 비용 / 세금계산서 비용으로 통합</li>
+                    <li>내부 Gemini 분류 로직은 유지, 사용자에게만 숨김</li>
+                    <li>과거 2년치 소득·비용 요약 표시 (신고 도움 서비스 기준)</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="decision"><strong>목적:</strong> 세무 처리 방식 노출 최소화 → 경쟁사 모방 방지 + 사용자 UX 단순화.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num">3</div><h3>제휴사 연동 방식</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">앱 개발 대신 링크 방식</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>제휴사 앱에서 클릭 시 URL로 셀프텍스 연결</li>
+                    <li>제휴사별 커스텀 페이지 제작 (작업 어렵지 않으나 시간 소요)</li>
+                    <li>네이티브 앱 개발은 나중으로 — 지금은 웹 링크 방식 우선</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 원택스 -->
+        <div id="d0327-wontax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">1</div><h3>세무대리인 인증 방식 결정</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">검토한 방식</div>
+                <div class="topic-body">
+                  <ul>
+                    <li><strong>개인 인증:</strong> 사용자가 직접 홈택스 신고 (조정료 수취 불가)</li>
+                    <li><strong>세무대리인 인증:</strong> 우리 인증서로 신고 → 조정료 수취 가능</li>
+                    <li>수임동의 방식 검토 → 결제 시점에 수임동의 버튼 삽입</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="decision"><strong>결론:</strong> 우리(세무법인) 인증서로 신고. 사용자는 결제 전 수임동의 1회만 진행.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">2</div><h3>지방세 신고 방식</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">두 가지 방안 비교</div>
+                <div class="topic-body">
+                  <ul>
+                    <li><strong>방안 1:</strong> 인포텍 위택스 API 계약 (50만원) → 자동화</li>
+                    <li><strong>방안 2:</strong> 전자파일 직접 생성 후 우리 인증서로 홈택스+위택스 신고</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note">방안 2가 오류 적고 시간 절약. 인포텍 계약 없이도 가능. 다만 위택스 별도 로그인 필요 여부 추가 확인 필요.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 기타 의견 -->
+        <div id="d0327-other" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#7f8c8d">?</div><h3>기타 논의 내용</h3></div>
+            <div class="section-bd">
+              <div class="other-card">
+                <div class="oc-title">핵심 인사이트 — "세무사·회계사임을 잊고 있었다"</div>
+                <div class="oc-body">개발에 집중하다 보니 세무사·회계사 자격이라는 가장 큰 강점을 활용하지 못하고 있었음. 경쟁사들이 자격이 없어서 못 하는 영역을 직접 할 수 있다는 것이 차별점. 3만원 셀프신고보다 세무법인 서비스 방향이 수익성도 높음.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">더존(위하고) API 없음 → M8 자동화 도구 검토</div>
+                <div class="oc-body">더존 공식 API 없음 확인. M8(자동화 도구)으로 위하고 자동 로그인 및 파일 업로드 가능 여부 검토 시작. 위하고 ID/PW 제공하면 테스트 가능.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">LLM SEO(GEO) — "찾아줘 세무사" 노출 현황</div>
+                <div class="oc-body">차설세무사가 네이버·GPT에서 노출 시작됨. 세무365, 세무택스 등 경쟁사 대비 셀프텍스 노출 부족. 나무위키 등 정의 등록 + 스키마 작업으로 LLM 상위 노출 가능. 약 3~4주 작업으로 독점적 노출 목표.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">영웅무 제휴 규모 — 실제 360명 수준</div>
+                <div class="oc-body">영웅무에서 작년 직접 부가세 신고 450명, 이번 셀프텍스 연동 360명. 만 명 규모 아닌 실제 2천명 이하. 시장 확대를 위한 영업 필요.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /inner-panels -->
+    </div><!-- /meeting-card -->
+  </div><!-- /date-d0327 -->
 
   <div class="footer">셀프텍스 개발 회의록 · 자동 생성</div>
 
