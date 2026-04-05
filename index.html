@@ -39,19 +39,19 @@
       max-width: 1040px;
       margin: 0 auto;
       display: flex;
-      gap: 3px;
-      overflow-x: auto;
+      flex-wrap: wrap;
+      gap: 2px;
       padding-bottom: 0;
-      margin-top: 16px;
+      margin-top: 10px;
     }
     .date-tab {
       flex-shrink: 0;
-      padding: 10px 22px;
+      padding: 6px 14px;
       background: rgba(255,255,255,0.12);
       color: rgba(255,255,255,0.75);
       border: none;
-      border-radius: 8px 8px 0 0;
-      font-size: 14px;
+      border-radius: 6px 6px 0 0;
+      font-size: 9.5px;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
@@ -60,22 +60,22 @@
       bottom: -1px;
       display: flex;
       align-items: center;
-      gap: 7px;
+      gap: 4px;
     }
     .date-tab:hover { background: rgba(255,255,255,0.2); color: white; }
     .date-tab.active {
       background: #eef1f6;
       color: #12294a;
       border-top: 3px solid #4fc3f7;
-      padding-top: 8px;
+      padding-top: 4px;
     }
     .date-badge {
       background: rgba(255,255,255,0.2);
       color: white;
-      font-size: 10px;
+      font-size: 8px;
       font-weight: 700;
-      padding: 1px 7px;
-      border-radius: 8px;
+      padding: 1px 5px;
+      border-radius: 6px;
     }
     .date-tab.active .date-badge {
       background: #4fc3f7;
@@ -329,26 +329,26 @@
     </div>
   </div>
   <div class="date-tabs">
-    <button class="date-tab active" onclick="switchDate('d0310a')">
-      📅 3월 10일 <span class="date-badge">①오전</span>
-    </button>
-    <button class="date-tab" onclick="switchDate('d0310b')">
-      📅 3월 10일 <span class="date-badge">②오후</span>
-    </button>
-    <button class="date-tab" onclick="switchDate('d0313')">
-      📅 3월 13일 <span class="date-badge">오전</span>
-    </button>
-    <button class="date-tab" onclick="switchDate('d0316')">
-      📅 3월 16일 <span class="date-badge">오전</span>
-    </button>
-    <button class="date-tab" onclick="switchDate('d0321')">
-      📅 3월 21일 <span class="date-badge">오전</span>
+    <button class="date-tab active" onclick="switchDate('d0327')">
+      📅 3월 27일 <span class="date-badge">오후</span>
     </button>
     <button class="date-tab" onclick="switchDate('d0324')">
       📅 3월 24일 <span class="date-badge">오전</span>
     </button>
-    <button class="date-tab" onclick="switchDate('d0327')">
-      📅 3월 27일 <span class="date-badge">오후</span>
+    <button class="date-tab" onclick="switchDate('d0321')">
+      📅 3월 21일 <span class="date-badge">오전</span>
+    </button>
+    <button class="date-tab" onclick="switchDate('d0316')">
+      📅 3월 16일 <span class="date-badge">오전</span>
+    </button>
+    <button class="date-tab" onclick="switchDate('d0313')">
+      📅 3월 13일 <span class="date-badge">오전</span>
+    </button>
+    <button class="date-tab" onclick="switchDate('d0310b')">
+      📅 3월 10일 <span class="date-badge">②오후</span>
+    </button>
+    <button class="date-tab" onclick="switchDate('d0310a')">
+      📅 3월 10일 <span class="date-badge">①오전</span>
     </button>
     <!-- 추가 날짜는 여기에 계속 붙여넣기 -->
   </div>
@@ -360,7 +360,7 @@
   <!-- ══════════════════════════════════════
        날짜: 3월 10일 ① 오전
   ══════════════════════════════════════ -->
-  <div id="date-d0310a" class="date-panel active">
+  <div id="date-d0310a" class="date-panel">
     <div class="meeting-card">
 
       <div class="meeting-header">
@@ -1708,7 +1708,7 @@
   <!-- ══════════════════════════════════════
        날짜: 3월 27일 (오후)
   ══════════════════════════════════════ -->
-  <div id="date-d0327" class="date-panel">
+  <div id="date-d0327" class="date-panel active">
     <div class="meeting-card">
 
       <div class="meeting-header">
