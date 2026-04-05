@@ -35,15 +35,39 @@
     .site-subtitle { font-size: 13px; opacity: 0.7; margin-top: 3px; }
 
     /* ── Date Tabs (outer) ── */
-    .date-tabs {
+    .date-tabs-wrapper {
       max-width: 1040px;
-      margin: 0 auto;
+      margin: 10px auto 0;
+      position: relative;
+      padding-right: 34px;
+    }
+    .date-tabs {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 3px;
-      padding-bottom: 0;
-      margin-top: 10px;
+      max-height: 83px;
+      overflow-y: hidden;
+      transition: max-height .25s ease;
     }
+    .tabs-arrow {
+      position: absolute;
+      right: 0;
+      width: 30px;
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: rgba(255,255,255,0.85);
+      cursor: pointer;
+      border-radius: 6px 6px 0 0;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .15s;
+      bottom: 1px;
+      height: 40px;
+    }
+    .tabs-arrow:hover { background: rgba(255,255,255,0.28); }
+    .tabs-arrow.hidden { display: none; }
     .date-tab {
       padding: 10px 16px;
       background: rgba(255,255,255,0.12);
@@ -328,29 +352,32 @@
       <div class="site-subtitle">날짜 탭을 선택하세요</div>
     </div>
   </div>
-  <div class="date-tabs">
-    <button class="date-tab active" onclick="switchDate('d0327')">
-      📅 3월 27일 <span class="date-badge">오후</span>
-    </button>
-    <button class="date-tab" onclick="switchDate('d0324')">
-      📅 3월 24일 <span class="date-badge">오전</span>
-    </button>
-    <button class="date-tab" onclick="switchDate('d0321')">
-      📅 3월 21일 <span class="date-badge">오전</span>
-    </button>
-    <button class="date-tab" onclick="switchDate('d0316')">
-      📅 3월 16일 <span class="date-badge">오전</span>
-    </button>
-    <button class="date-tab" onclick="switchDate('d0313')">
-      📅 3월 13일 <span class="date-badge">오전</span>
-    </button>
-    <button class="date-tab" onclick="switchDate('d0310b')">
-      📅 3월 10일 <span class="date-badge">②오후</span>
-    </button>
-    <button class="date-tab" onclick="switchDate('d0310a')">
-      📅 3월 10일 <span class="date-badge">①오전</span>
-    </button>
-    <!-- 추가 날짜는 여기에 계속 붙여넣기 -->
+  <div class="date-tabs-wrapper">
+    <div class="date-tabs" id="dateTabs">
+      <button class="date-tab active" onclick="switchDate('d0327')">
+        📅 3월 27일 <span class="date-badge">오후</span>
+      </button>
+      <button class="date-tab" onclick="switchDate('d0324')">
+        📅 3월 24일 <span class="date-badge">오전</span>
+      </button>
+      <button class="date-tab" onclick="switchDate('d0321')">
+        📅 3월 21일 <span class="date-badge">오전</span>
+      </button>
+      <button class="date-tab" onclick="switchDate('d0316')">
+        📅 3월 16일 <span class="date-badge">오전</span>
+      </button>
+      <button class="date-tab" onclick="switchDate('d0313')">
+        📅 3월 13일 <span class="date-badge">오전</span>
+      </button>
+      <button class="date-tab" onclick="switchDate('d0310b')">
+        📅 3월 10일 <span class="date-badge">②오후</span>
+      </button>
+      <button class="date-tab" onclick="switchDate('d0310a')">
+        📅 3월 10일 <span class="date-badge">①오전</span>
+      </button>
+      <!-- 추가 날짜는 여기에 계속 붙여넣기 -->
+    </div>
+    <button class="tabs-arrow" id="tabsArrow" onclick="toggleTabs()">▼</button>
   </div>
 </div>
 
@@ -1950,6 +1977,27 @@
 </div><!-- /main -->
 
 <script>
+  // 탭 펼치기/접기
+  var tabsExpanded = false;
+  function toggleTabs() {
+    var tabs = document.getElementById('dateTabs');
+    var arrow = document.getElementById('tabsArrow');
+    tabsExpanded = !tabsExpanded;
+    if (tabsExpanded) {
+      tabs.style.maxHeight = tabs.scrollHeight + 'px';
+      arrow.textContent = '▲';
+    } else {
+      tabs.style.maxHeight = '83px';
+      arrow.textContent = '▼';
+    }
+  }
+  // 탭이 2줄 이하면 화살표 숨기기
+  window.addEventListener('load', function() {
+    var tabs = document.getElementById('dateTabs');
+    var arrow = document.getElementById('tabsArrow');
+    if (tabs.scrollHeight <= 83) arrow.classList.add('hidden');
+  });
+
   function switchDate(dateId) {
     document.querySelectorAll('.date-tab').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.date-panel').forEach(p => p.classList.remove('active'));
