@@ -38,20 +38,19 @@
     .date-tabs {
       max-width: 1040px;
       margin: 0 auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
       padding-bottom: 0;
       margin-top: 10px;
     }
     .date-tab {
-      flex-shrink: 0;
-      padding: 6px 14px;
+      padding: 10px 16px;
       background: rgba(255,255,255,0.12);
       color: rgba(255,255,255,0.75);
       border: none;
-      border-radius: 6px 6px 0 0;
-      font-size: 9.5px;
+      border-radius: 8px 8px 0 0;
+      font-size: 13px;
       font-weight: 600;
       cursor: pointer;
       font-family: inherit;
@@ -60,22 +59,23 @@
       bottom: -1px;
       display: flex;
       align-items: center;
-      gap: 4px;
+      justify-content: center;
+      gap: 6px;
     }
     .date-tab:hover { background: rgba(255,255,255,0.2); color: white; }
     .date-tab.active {
       background: #eef1f6;
       color: #12294a;
       border-top: 3px solid #4fc3f7;
-      padding-top: 4px;
+      padding-top: 8px;
     }
     .date-badge {
       background: rgba(255,255,255,0.2);
       color: white;
-      font-size: 8px;
+      font-size: 10px;
       font-weight: 700;
-      padding: 1px 5px;
-      border-radius: 6px;
+      padding: 1px 7px;
+      border-radius: 8px;
     }
     .date-tab.active .date-badge {
       background: #4fc3f7;
