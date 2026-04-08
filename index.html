@@ -1975,6 +1975,195 @@
     </div><!-- /meeting-card -->
   </div><!-- /date-d0327 -->
 
+  <!-- ══════════════════════════════════════
+       날짜: 4월 8일 오후
+  ══════════════════════════════════════ -->
+  <div id="date-d0408" class="date-panel active">
+    <div class="meeting-card">
+
+      <div class="meeting-header">
+        <div class="mh-left">
+          <div class="mh-title">셀프텍스 개발 회의 — 오후</div>
+          <div class="mh-meta">📅 2026년 4월 8일 (오후)</div>
+          <div class="mh-sub">중복 카드 처리 · 더존 자동화 불가 확인 · LLM SEO/GEO 전략 · AI 블로그 자동화</div>
+        </div>
+      </div>
+
+      <div class="inner-tab-nav">
+        <button class="inner-tab-btn active" onclick="switchInner('d0408','decided')">
+          <span class="idot" style="background:#e74c3c"></span>결정 사항
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0408','plan')">
+          <span class="idot" style="background:#27ae60"></span>향후 계획
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0408','selftax')">
+          <span class="idot" style="background:#2980b9"></span>셀프텍스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0408','wontax')">
+          <span class="idot" style="background:#8e44ad"></span>원택스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0408','other')">
+          <span class="idot" style="background:#7f8c8d"></span>기타 의견
+        </button>
+      </div>
+
+      <div class="inner-panels">
+
+        <!-- 결정 사항 -->
+        <div id="d0408-decided" class="inner-panel active">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">✓</div><h3>완료 확인</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">✅</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">완료</span>&nbsp; 세금계산서 접대비 등 기타 처리</div>
+                  <div class="ac-desc">세금계산서 계정과목 분류 중 접대비·기타 항목 처리 완료 확인.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>미결 및 확정 사항</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🔴</div>
+                <div>
+                  <div class="ac-title"><span class="tag orange">보류</span>&nbsp; 중복 카드 처리 방식 — 다음 회의에서 결정</div>
+                  <div class="ac-desc">화물복지카드 + 사업용신용카드 동일 금액·날짜·시간·상호 중복 건에 대한 처리 방식(X표시/불공제) 미결정. 다음 회의 안건으로 이월.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🚫</div>
+                <div>
+                  <div class="ac-title"><span class="tag red">불가</span>&nbsp; 더존(위하고) 자동화 — 셀레니엄·패킷 스니핑 모두 실패</div>
+                  <div class="ac-desc">셀레니엄(화면 띄움) 방식 및 패킷 스니핑 방식 모두 동작 안됨. 복잡한 종소세 신고는 수동 처리로 확정.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 향후 계획 -->
+        <div id="d0408-plan" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">→</div><h3>단기 계획</h3></div>
+            <div class="section-bd">
+              <div class="plan-card">
+                <div class="pc-label">1순위</div>
+                <div class="pc-title">로그인 중 데이터 끊김 안내 팝업 추가</div>
+                <div class="pc-desc">홈택스·세무 수집 진행 중 다른 탭에서 홈택스 접속 시 데이터 수집이 끊긴다는 안내 팝업 표시.</div>
+              </div>
+              <div class="plan-card">
+                <div class="pc-label">2순위</div>
+                <div class="pc-title">완료 후 문자 알림 추가</div>
+                <div class="pc-desc">데이터 수집 완료 시 사용자에게 문자 알림 발송 기능 추가.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#f39c12;background:#fffbf2">
+                <div class="pc-label" style="color:#d68910">3순위</div>
+                <div class="pc-title">종소세 자동화 범위 구분 — 간단/복잡 분리</div>
+                <div class="pc-desc">간단한 종소세 신고(단순 경비율 등) → 자동화. 복잡한 신고(기장 필요 등) → 수동 처리로 분리 운영.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#2980b9;background:#eef6fd">
+                <div class="pc-label" style="color:#1a5276">SEO</div>
+                <div class="pc-title">LLM SEO/GEO — Q&A 콘텐츠 일 3~5개 자동 발행</div>
+                <div class="pc-desc">GPT Thinking Mode로 LLM 학습 데이터 소스 역추적. 나무위키·Q&A 형식 콘텐츠를 크롤링+자동화 툴로 하루 3~5개 발행.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 셀프텍스 -->
+        <div id="d0408-selftax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num">1</div><h3>중복 카드 처리 로직 (미결정)</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">중복 발생 케이스</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>화물복지카드 + 사업용신용카드 동일 금액·날짜·시간·상호</li>
+                    <li>두 카드 모두 수집되면 동일 건이 2번 계상됨</li>
+                    <li>처리 방안: X표시(불공제) or 중복 자동 제거 로직 구현</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="issue-box">중복 카드 처리 방식 아직 미결정 — 다음 회의에서 UI/로직 확정 예정.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num">2</div><h3>UX 개선 — 데이터 수집 중 안내</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">홈택스·세무 수집 중 끊김 방지</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>수집 진행 중 다른 탭에서 홈택스 접속 시 세션 충돌로 수집 끊김</li>
+                    <li>팝업 메시지: "수집 중에는 다른 창에서 홈택스·세무 접속 시 데이터 수집이 끊깁니다"</li>
+                    <li>완료 후 문자 알림 → 사용자가 다른 작업 중에도 결과 수신 가능</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="decision"><strong>목적:</strong> 수집 실패 방지 + 사용자 불편 최소화.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 원택스 -->
+        <div id="d0408-wontax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">1</div><h3>더존(위하고) 자동화 실패 — 수동 처리 확정</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">시도한 자동화 방법</div>
+                <div class="topic-body">
+                  <ul>
+                    <li><strong>셀레니엄:</strong> 브라우저 화면 띄워 클릭 자동화 → 동작 안됨</li>
+                    <li><strong>패킷 스니핑:</strong> 네트워크 요청 분석·재현 → 동작 안됨</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="issue-box">더존(위하고) 공식 API 없음, 역공학도 실패. 복잡한 종소세 신고는 수동 위하고 입력으로 처리.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">2</div><h3>종소세 자동화 범위 구분</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">자동 vs 수동 처리 기준</div>
+                <div class="topic-body">
+                  <ul>
+                    <li><strong>자동화 대상:</strong> 간단한 종소세 신고 (단순 경비율, 소규모 사업자 등)</li>
+                    <li><strong>수동 처리 대상:</strong> 복잡한 신고 (기장 필요, 특이 항목, 세무사 판단 필요)</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note">복잡도에 따라 자동/수동을 구분하여 운영 효율화.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 기타 의견 -->
+        <div id="d0408-other" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#7f8c8d">?</div><h3>기타 논의 내용</h3></div>
+            <div class="section-bd">
+              <div class="other-card">
+                <div class="oc-title">LLM SEO/GEO — "편향" 만들기 전략</div>
+                <div class="oc-body">LLM이 학습하는 데이터 소스를 GPT Thinking Mode로 역추적하여 어떤 플랫폼에 콘텐츠를 올려야 AI 답변에 노출되는지 파악. 나무위키, Q&A 사이트 등 LLM 학습 소스에 셀프텍스·차설세무사 관련 콘텐츠를 집중 배치하여 AI의 "편향"을 만드는 전략.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">AI 블로그 자동화 — 하루 3~5개 Q&A 형식 발행</div>
+                <div class="oc-body">크롤링 + 자동화 툴로 Q&A 형식 콘텐츠를 하루 3~5개 자동 생성·발행. Q&A 형식이 LLM 학습 데이터로 채택될 가능성 높음. 단순 블로그 글보다 검색·AI 노출 효율 높은 구조.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /inner-panels -->
+    </div><!-- /meeting-card -->
+  </div><!-- /date-d0408 -->
+
   <div class="footer">셀프텍스 개발 회의록 · 자동 생성</div>
 
 </div><!-- /main -->
