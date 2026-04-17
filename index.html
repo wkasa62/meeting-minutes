@@ -423,7 +423,10 @@
   </div>
   <div class="date-tabs-wrapper">
     <div class="date-tabs" id="dateTabs">
-      <button class="date-tab active" onclick="switchDate('d0408')">
+      <button class="date-tab active" onclick="switchDate('d0415')">
+        📅 4월 15일 <span class="date-badge">오후</span>
+      </button>
+      <button class="date-tab" onclick="switchDate('d0408')">
         📅 4월 8일 <span class="date-badge">오후</span>
       </button>
       <button class="date-tab" onclick="switchDate('d0327')">
@@ -2047,7 +2050,7 @@
   <!-- ══════════════════════════════════════
        날짜: 4월 8일 오후
   ══════════════════════════════════════ -->
-  <div id="date-d0408" class="date-panel active">
+  <div id="date-d0408" class="date-panel">
     <div class="meeting-card">
 
       <div class="meeting-header">
@@ -2232,6 +2235,278 @@
       </div><!-- /inner-panels -->
     </div><!-- /meeting-card -->
   </div><!-- /date-d0408 -->
+
+  <!-- ══════════════════════════════════════
+       날짜: 4월 15일 오후
+  ══════════════════════════════════════ -->
+  <div id="date-d0415" class="date-panel active">
+    <div class="meeting-card">
+
+      <div class="meeting-header">
+        <div class="mh-left">
+          <div class="mh-title">셀프텍스 개발 회의 — 오후</div>
+          <div class="mh-meta">📅 2026년 4월 15일 (오후)</div>
+          <div class="mh-sub">소득세 화면 구성 · 계정분류 프롬프트 개선 · 매입/매출 계산서 버그 · 과세유형 변경 처리</div>
+        </div>
+      </div>
+
+      <div class="inner-tab-nav">
+        <button class="inner-tab-btn active" onclick="switchInner('d0415','decided')">
+          <span class="idot" style="background:#e74c3c"></span>결정 사항
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0415','plan')">
+          <span class="idot" style="background:#27ae60"></span>향후 계획
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0415','selftax')">
+          <span class="idot" style="background:#2980b9"></span>셀프텍스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0415','wontax')">
+          <span class="idot" style="background:#8e44ad"></span>원택스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0415','other')">
+          <span class="idot" style="background:#7f8c8d"></span>기타 의견
+        </button>
+      </div>
+
+      <div class="inner-panels">
+
+        <!-- 결정 사항 -->
+        <div id="d0415-decided" class="inner-panel active">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>프롬프트 개선 확정</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">📝</div>
+                <div>
+                  <div class="ac-title"><span class="tag blue">프롬프트</span>&nbsp; 편의점(CU·GS25·세븐일레븐) → 소모품비로 통일</div>
+                  <div class="ac-desc">직원 없는 사업자의 편의점 지출은 소모품비로 일괄 처리. 프롬프트 제약사항에 단어 단위로 추가 (CU, GS25, 세븐일레븐 한/영 모두).</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">📝</div>
+                <div>
+                  <div class="ac-title"><span class="tag blue">프롬프트</span>&nbsp; 접대비로 분류된 계정 → 불공제 처리 추가</div>
+                  <div class="ac-desc">계정과목이 접대비로 분류된 경우 공제/불공제 구분을 불공제로 처리하도록 프롬프트에 명시.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>버그 수정 확정</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🐛</div>
+                <div>
+                  <div class="ac-title"><span class="tag red">버그</span>&nbsp; 매출전자계산서가 매입으로 잘못 집계되는 문제</div>
+                  <div class="ac-desc">세금계산서 수집 시 매출전자·매출종이 계산서도 포함되어 운반비 등 매입 금액이 과다 집계됨. 수정: 매입전자·매입종이(매입과세·면세)만 가져오도록 로직 변경.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">✓</div><h3>방향 결정</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🔄</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">확정</span>&nbsp; 과세유형(간이↔일반) 변경 — 연 2회 공공API 배치 재검증</div>
+                  <div class="ac-desc">매핑 DB의 과세유형을 공공API로 연 2회(1월, 8월) 전체 재검증. 간이→일반: 불공제→공제, 일반→간이: 공제→불공제로 자동 전환. 계정과목 변경 불필요.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🎯</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">우선순위</span>&nbsp; 전자신고 먼저 완성 — 계정과목 완성도는 후순위</div>
+                  <div class="ac-desc">계정과목 100% 자동화보다 전자신고 프로세스 완성이 급선무. 계정과목은 사용자 수동 수정 병행으로 운영.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 향후 계획 -->
+        <div id="d0415-plan" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">→</div><h3>단기 계획</h3></div>
+            <div class="section-bd">
+              <div class="plan-card">
+                <div class="pc-label">1순위</div>
+                <div class="pc-title">전자신고 프로세스 완성</div>
+                <div class="pc-desc">소득세 납부세액 팝업 → 상세 화면 → 신고하기 버튼 흐름 완성. 계정과목 완성도와 무관하게 신고 프로세스 먼저 구현.</div>
+              </div>
+              <div class="plan-card">
+                <div class="pc-label">2순위</div>
+                <div class="pc-title">프롬프트 추가 — 편의점 소모품비 / 접대비 불공제</div>
+                <div class="pc-desc">CU, GS25, 세븐일레븐(한/영) 소모품비 처리 및 접대비 불공제 처리 프롬프트 반영 후 재테스트.</div>
+              </div>
+              <div class="plan-card">
+                <div class="pc-label">3순위</div>
+                <div class="pc-title">매출전자계산서 매입 제외 로직 수정</div>
+                <div class="pc-desc">세금계산서 수집 시 매출 쪽(매출전자·매출종이) 제외, 매입 쪽만 가져오도록 수정.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#8e44ad;background:#f8f0ff">
+                <div class="pc-label" style="color:#7d3c98">배치</div>
+                <div class="pc-title">과세유형 재검증 배치 구현 (1월·8월)</div>
+                <div class="pc-desc">공공API로 매핑 DB 전체 과세유형 재검증. 변경된 경우 공제/불공제 자동 업데이트.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 셀프텍스 -->
+        <div id="d0415-selftax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num">1</div><h3>종합소득세 화면 구성</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">화면 진입 순서</div>
+                <div class="topic-body">
+                  <div class="flow">
+                    <span class="flow-step">납부세액 확인 팝업</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step">소득세 상세 화면</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step">신고하기 버튼</span>
+                  </div>
+                  <ul style="margin-top:8px">
+                    <li>진입 시 팝업: "현재까지 납부세액은 [금액]입니다" → 확인하기</li>
+                    <li>상세 화면: 소득합계 → 과세표준 → 산출세 → 세액공제 → 기납부(중간납부)세액 → 최종 납부세액</li>
+                    <li>인적공제 등 세액공제: 화면 내 플러스(+) 버튼으로 직접 추가 가능</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="decision"><strong>목적:</strong> 숫자 과부하 없이 단계적으로 확인 → 신고까지 자연스러운 흐름 유도.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num">2</div><h3>홈택스 차단/끊김 시 처리</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">수집 도중 홈택스 세션 끊김</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>완료 후 끊김 vs 수집 중 끊김을 시스템이 구분 인지 필요</li>
+                    <li>수집 미완료 상태로 끊긴 경우 → 재로그인 시 처음부터 재수집</li>
+                    <li>홈택스 차단(IP 차단 등) 발생 시 처음부터 재시도</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note">수집 완료 여부를 상태값으로 관리하여 재시작/재시도 분기 처리 필요.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num">3</div><h3>구사소득 업종 분류</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">업종 분류 기준</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>구사소득은 용역/서비스업 계열로 분류 (음식점 혼입 방지)</li>
+                    <li>미용실·서비스업 계열 업종코드로 매핑 (부가세 불적용)</li>
+                    <li>입력 항목에 "구사소득" 텍스트 추가로 식별 가능하게 표시</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 원택스 -->
+        <div id="d0415-wontax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">1</div><h3>계정과목 분류 프롬프트 개선</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">편의점 소모품비 처리</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>대상: CU(한/영), GS25, 세븐일레븐 등 편의점 상호</li>
+                    <li>분류 기준: 직원 없는 사업자 → 소모품비, 직원 있는 경우 → 복리후생비</li>
+                    <li>기존 접대비·사업무관으로 분류된 건 정정 필요</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="topic">
+                <div class="topic-title">접대비 → 불공제 처리</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>계정과목이 접대비로 분류된 경우 공제 여부를 불공제로 지정</li>
+                    <li>프롬프트에 우선순위 조건으로 추가</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="issue-box">현재 편의점 분류가 접대비·소모품비·복리후생비·사업무관으로 혼재. 프롬프트 추가 후 재분류 필요.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">2</div><h3>매입/매출 계산서 구분 버그</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">문제 현상</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>세금계산서 수집 시 매출전자계산서까지 포함되어 매입 금액 과다 집계</li>
+                    <li>예: 운반비 항목에 매출 쪽 운반비(4,800만원 규모)가 매입으로 잘못 집계됨</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="topic">
+                <div class="topic-title">수정 방향</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>매출전자·매출종이 계산서 수집 제외</li>
+                    <li>매입전자·매입종이(과세·면세) 만 집계</li>
+                    <li>계산서 쪽도 동일하게 매입만 수집</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="decision"><strong>수정 후:</strong> 매입 합계금액 기준으로 정상 집계 확인 필요.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">3</div><h3>과세유형 변경 처리 로직</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">처리 방식</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>연 2회(1월·8월) 공공API로 매핑 DB 전체 과세유형 재검증</li>
+                    <li>간이→일반 변경: 불공제 → 공제로 전환</li>
+                    <li>일반→간이 변경: 공제 → 불공제로 전환</li>
+                    <li>계정과목은 그대로 유지 (공제/불공제만 변경)</li>
+                    <li>Gemini 재분석 불필요</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note">7월 과세유형 변경 기준 → 8월 초 배치 실행으로 타이밍 맞춤.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 기타 의견 -->
+        <div id="d0415-other" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#7f8c8d">?</div><h3>기타 논의 내용</h3></div>
+            <div class="section-bd">
+              <div class="other-card">
+                <div class="oc-title">베타 서버 속도 이슈</div>
+                <div class="oc-body">사업자 6개 보유 고객 데이터 수집에 10~15분 소요. 실서버 전환 시 속도 개선 기대. 데이터 분류를 3분할 병렬처리했던 방식과 달리, 소득세 계산은 순서 의존성이 있어 병렬처리 불가.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">AI 계정분류 한계 — 100% 자동화 불가</div>
+                <div class="oc-body">HY(연세우유), 애슬로우(임대료) 등 상호만으로 계정 판단 불가 케이스 다수. 사용자가 처음 한 번 수정하면 이후 동일 사업자는 매핑 DB로 자동 처리. 기준경비율 신고 외 100% 자동화는 어려우며, 전자신고 완성 후 단계적으로 정교화 예정.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">국가 지원금(차세) 검토 필요</div>
+                <div class="oc-body">정규직 인원 조건 등으로 현재 구조에서 신청 어려움. 셀프텍스 또는 차세 법인 명의로 신청 검토 필요. 세르텍세 포함 국가 지원 프로그램 구체적 조사 필요.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /inner-panels -->
+    </div><!-- /meeting-card -->
+  </div><!-- /date-d0415 -->
 
   <div class="footer">셀프텍스 개발 회의록 · 자동 생성</div>
 
