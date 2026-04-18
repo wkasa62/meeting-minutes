@@ -2278,8 +2278,8 @@
               <div class="action-card">
                 <div class="ac-icon">📝</div>
                 <div>
-                  <div class="ac-title"><span class="tag blue">프롬프트</span>&nbsp; 편의점(CU·GS25·세븐일레븐) → 소모품비로 통일</div>
-                  <div class="ac-desc">직원 없는 사업자의 편의점 지출은 소모품비로 일괄 처리. 프롬프트 제약사항에 단어 단위로 추가 (CU, GS25, 세븐일레븐 한/영 모두).</div>
+                  <div class="ac-title"><span class="tag gray">유지</span>&nbsp; 편의점 계정과목 분류 — 기존 방식 유지</div>
+                  <div class="ac-desc">편의점을 소모품비로 일괄 통일 시 모든 계정이 획일적으로 보이는 문제. 기존 AI 분류 방식대로 유지하기로 결정.</div>
                 </div>
               </div>
               <div class="action-card">
@@ -2336,8 +2336,8 @@
               </div>
               <div class="plan-card">
                 <div class="pc-label">2순위</div>
-                <div class="pc-title">프롬프트 추가 — 편의점 소모품비 / 접대비 불공제</div>
-                <div class="pc-desc">CU, GS25, 세븐일레븐(한/영) 소모품비 처리 및 접대비 불공제 처리 프롬프트 반영 후 재테스트.</div>
+                <div class="pc-title">프롬프트 추가 — 접대비 불공제 처리</div>
+                <div class="pc-desc">접대비로 분류된 계정을 불공제 처리하도록 프롬프트 반영 후 재테스트. 편의점 계정 분류는 기존 방식 유지.</div>
               </div>
               <div class="plan-card">
                 <div class="pc-label">3순위</div>
@@ -2417,12 +2417,11 @@
             <div class="section-hd"><div class="s-num" style="background:#8e44ad">1</div><h3>계정과목 분류 프롬프트 개선</h3></div>
             <div class="section-bd">
               <div class="topic">
-                <div class="topic-title">편의점 소모품비 처리</div>
+                <div class="topic-title">편의점 계정 분류 — 기존 유지</div>
                 <div class="topic-body">
                   <ul>
-                    <li>대상: CU(한/영), GS25, 세븐일레븐 등 편의점 상호</li>
-                    <li>분류 기준: 직원 없는 사업자 → 소모품비, 직원 있는 경우 → 복리후생비</li>
-                    <li>기존 접대비·사업무관으로 분류된 건 정정 필요</li>
+                    <li>소모품비로 일괄 통일 시 모든 계정이 획일적으로 보이는 문제 발생</li>
+                    <li>기존 AI 분류 방식(AI 판단에 따라 분류) 그대로 유지하기로 결정</li>
                   </ul>
                 </div>
               </div>
