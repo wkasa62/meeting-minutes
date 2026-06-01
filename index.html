@@ -423,7 +423,10 @@
   </div>
   <div class="date-tabs-wrapper">
     <div class="date-tabs" id="dateTabs">
-      <button class="date-tab active" onclick="switchDate('d0522')">
+      <button class="date-tab active" onclick="switchDate('d0601')">
+        📅 6월 1일 <span class="date-badge">오후</span>
+      </button>
+      <button class="date-tab" onclick="switchDate('d0522')">
         📅 5월 22일 <span class="date-badge">오후</span>
       </button>
       <button class="date-tab" onclick="switchDate('d0519')">
@@ -2726,9 +2729,176 @@
   </div><!-- /date-d0508 -->
 
   <!-- ══════════════════════════════════════
+       날짜: 6월 1일 오후
+  ══════════════════════════════════════ -->
+  <div id="date-d0601" class="date-panel active">
+    <div class="meeting-card">
+
+      <div class="meeting-header">
+        <div class="mh-left">
+          <div class="mh-title">셀프텍스 개발 회의 — 오후</div>
+          <div class="mh-meta">📅 2026년 6월 1일 (오후)</div>
+          <div class="mh-sub">부동산 임대공급가액 명세서 테스트 · 간주임대료 계산 검증 · 퇴거일 자동처리 · 홈텍스 데이터 가져오기 확인 필요</div>
+        </div>
+      </div>
+
+      <div class="inner-tab-nav">
+        <button class="inner-tab-btn active" onclick="switchInner('d0601','decided')">
+          <span class="idot" style="background:#e74c3c"></span>결정 사항
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0601','plan')">
+          <span class="idot" style="background:#27ae60"></span>향후 계획
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0601','selftax')">
+          <span class="idot" style="background:#2980b9"></span>셀프텍스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0601','wontax')">
+          <span class="idot" style="background:#8e44ad"></span>원택스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0601','other')">
+          <span class="idot" style="background:#7f8c8d"></span>기타 의견
+        </button>
+      </div>
+
+      <div class="inner-panels">
+
+        <!-- 결정 사항 -->
+        <div id="d0601-decided" class="inner-panel active">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>부동산 임대공급가액 명세서 UX</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🏠</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">확정</span>&nbsp; 퇴거일 필드 숨김 처리</div>
+                  <div class="ac-desc">퇴거일 미입력 시 자동으로 과세기간 종료일(6월 30일)로 계산됨 확인. 퇴거일 입력 필드를 숨겨서 사용자 혼란 방지. 계약이 유지 중이면 입력할 필요 없음.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">📝</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">확인</span>&nbsp; 갱신일 입력 시 신규 행 자동 생성</div>
+                  <div class="ac-desc">갱신일 넣으면 같은 임차인의 갱신 행이 자동으로 추가됨. 퇴거일이 이전 계약 종료일로 자동 연결. 추가 갱신 시 반복 입력 가능.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>홈텍스 데이터 가져오기 우선 확인</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🔍</div>
+                <div>
+                  <div class="ac-title"><span class="tag orange">확인 필요</span>&nbsp; 홈텍스에서 임대 계약 데이터 API 가능 여부</div>
+                  <div class="ac-desc">홈텍스에서 부동산 임대 계약 정보를 가져올 수 있으면 자동 입력. 불가능하면 수동 입력(신규/갱신 구분) 그대로 유지. 가져오기 가능 여부 먼저 확인 후 UI 방향 결정.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>간주임대료 계산 검증</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">✅</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">검증 완료</span>&nbsp; 간주임대료 자동 계산 정확성 확인</div>
+                  <div class="ac-desc">보증금 1,000만원 기준 계산 결과 153,726원으로 일치 (= 1,000만원 ÷ 365 × 기간일수). 자동 계산 로직 정확함 확인.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 향후 계획 -->
+        <div id="d0601-plan" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">→</div><h3>홈텍스 임대 데이터 가져오기 확인</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">📡</div>
+                <div>
+                  <div class="ac-title">API 가져오기 가능 여부 최우선 확인</div>
+                  <div class="ac-desc">홈텍스에서 임대 계약(보증금, 월세, 임차인 정보) 자동 수집 가능한지 확인. 가능하면 자동 입력 방식으로 전환. 불가하면 현재 수동 입력 방식 유지.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">→</div><h3>임대료 세금계산서 비교 검증 방식 확정</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🧾</div>
+                <div>
+                  <div class="ac-title">다음 회의(목요일)에서 검증 방식 최종 결정</div>
+                  <div class="ac-desc">임대료 입력값과 세금계산서 합계 비교 로직 및 안내 문구 방식 확정 예정. 이하/이상 경고 vs 단순 안내 문구 방식 검토.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 셀프텍스 -->
+        <div id="d0601-selftax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#2980b9">S</div><h3>부동산 임대공급가액 명세서 테스트 (DED)</h3></div>
+            <div class="section-bd">
+              <ul class="disc-list">
+                <li>DED(개발) 환경 직접 접속하여 서식 테스트 진행</li>
+                <li>갱신일 입력 → 같은 임차인 갱신 행 자동 추가 확인</li>
+                <li>퇴거일 미입력 → 6월 30일 자동 계산 확인</li>
+                <li>보증금 + 임대료 입력 후 간주임대료 자동 계산 값 확인 (153,726원)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#2980b9">S</div><h3>임대료 검증 이슈</h3></div>
+            <div class="section-bd">
+              <ul class="disc-list">
+                <li>세금계산서 합계(70만원)와 임대료 입력값 비교 로직 — 임차인 사업자 번호 기준으로 발행 계산서 전체 합산</li>
+                <li>임대료 입력값이 계산서 합계 초과 시 안내 문구 방식 검토 중</li>
+                <li>현금영수증 발행 케이스도 섞일 수 있어 단순 비교 어려움</li>
+                <li>우선 이대로 등록 진행, 다음 회의에서 검증 방식 확정</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 원택스 -->
+        <div id="d0601-wontax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">W</div><h3>간주임대료 계산 로직</h3></div>
+            <div class="section-bd">
+              <ul class="disc-list">
+                <li>간주임대료 = 보증금 × 정기예금이자율 ÷ 365 × 과세기간 일수</li>
+                <li>테스트 케이스: 보증금 1,000만원 → 153,726원 자동 계산, 정확성 확인</li>
+                <li>5월 15일 갱신 케이스: 5개월 치 월세 250만원, 15일 추가 거주 포함</li>
+                <li>갱신 케이스 처리: 종전계약 퇴거일 = 갱신 전일, 신규계약 입주일 = 갱신일로 분리 입력</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 기타 의견 -->
+        <div id="d0601-other" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#7f8c8d">etc</div><h3>다음 회의 일정</h3></div>
+            <div class="section-bd">
+              <ul class="disc-list">
+                <li>다음 회의: 목요일 (6월 4일) — 수요일(6월 3일)이 선거일로 변경</li>
+                <li>임대료 검증 방식, 홈텍스 데이터 가져오기 결과 공유 예정</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /inner-panels -->
+    </div><!-- /meeting-card -->
+  </div><!-- /date-d0601 -->
+
+  <!-- ══════════════════════════════════════
        날짜: 5월 22일 오후
   ══════════════════════════════════════ -->
-  <div id="date-d0522" class="date-panel active">
+  <div id="date-d0522" class="date-panel">
     <div class="meeting-card">
 
       <div class="meeting-header">
