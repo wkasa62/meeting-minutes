@@ -423,7 +423,10 @@
   </div>
   <div class="date-tabs-wrapper">
     <div class="date-tabs" id="dateTabs">
-      <button class="date-tab active" onclick="switchDate('d0508')">
+      <button class="date-tab active" onclick="switchDate('d0514')">
+        📅 5월 14일 <span class="date-badge">오후</span>
+      </button>
+      <button class="date-tab" onclick="switchDate('d0508')">
         📅 5월 8일 <span class="date-badge">오후</span>
       </button>
       <button class="date-tab" onclick="switchDate('d0415')">
@@ -2525,7 +2528,7 @@
   <!-- ══════════════════════════════════════
        날짜: 5월 8일 오후
   ══════════════════════════════════════ -->
-  <div id="date-d0508" class="date-panel active">
+  <div id="date-d0508" class="date-panel">
     <div class="meeting-card">
 
       <div class="meeting-header">
@@ -2715,6 +2718,276 @@
       </div><!-- /inner-panels -->
     </div><!-- /meeting-card -->
   </div><!-- /date-d0508 -->
+
+  <!-- ══════════════════════════════════════
+       날짜: 5월 14일 오후
+  ══════════════════════════════════════ -->
+  <div id="date-d0514" class="date-panel active">
+    <div class="meeting-card">
+
+      <div class="meeting-header">
+        <div class="mh-left">
+          <div class="mh-title">셀프텍스 개발 회의 — 오후</div>
+          <div class="mh-meta">📅 2026년 5월 14일 (오후)</div>
+          <div class="mh-sub">OX→공제/불공제 변경 · 종소세 임시 제거 · 26년도 데이터만 수집 · 6월 오픈 홍보 계획</div>
+        </div>
+      </div>
+
+      <div class="inner-tab-nav">
+        <button class="inner-tab-btn active" onclick="switchInner('d0514','decided')">
+          <span class="idot" style="background:#e74c3c"></span>결정 사항
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0514','plan')">
+          <span class="idot" style="background:#27ae60"></span>향후 계획
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0514','selftax')">
+          <span class="idot" style="background:#2980b9"></span>셀프텍스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0514','wontax')">
+          <span class="idot" style="background:#8e44ad"></span>원택스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0514','other')">
+          <span class="idot" style="background:#7f8c8d"></span>기타 의견
+        </button>
+      </div>
+
+      <div class="inner-panels">
+
+        <!-- 결정 사항 -->
+        <div id="d0514-decided" class="inner-panel active">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>UI 용어 변경</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🔤</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">확정</span>&nbsp; OX → 공제/불공제 용어 변경</div>
+                  <div class="ac-desc">OX 개념을 사용자들이 인식하지 못해 혼선 발생. 공제/불공제 버튼으로 전면 변경. 메인 페이지 OX 기반 설명·영상 내용도 모두 제거.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>기능 축소 — 부가세 집중</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🚫</div>
+                <div>
+                  <div class="ac-title"><span class="tag orange">임시 제거</span>&nbsp; 종합소득세 기능 비활성화 (8월 이후 재개)</div>
+                  <div class="ac-desc">부가세 완결성 확보 우선. 종소세 신고서 페이지 숨김 처리 후 나머지 기능은 유지. 8~10월 중 종소세 재개, 11월~: 다시 부가세 준비.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">📅</div>
+                <div>
+                  <div class="ac-title"><span class="tag blue">확정</span>&nbsp; 26년도 데이터만 수집 — 25년도 제거</div>
+                  <div class="ac-desc">통신 속도 개선 및 Gemini 계정 분류 시간 단축 목적. 26년도 데이터만 자동 수집. 25년도 데이터는 필요 시 별도 불러오기 버튼으로 처리.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🚫</div>
+                <div>
+                  <div class="ac-title"><span class="tag orange">비활성화</span>&nbsp; 구사소득 수집 기능 임시 비활성화</div>
+                  <div class="ac-desc">부가세 집중 운영 기간 동안 구사소득 수집 기능 비활성화. 지연 원인 제거 및 처리 속도 개선.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">✓</div><h3>홍보·운영 방향</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">📣</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">확정</span>&nbsp; 6월 오픈 목표 — 전환사채 4억 홍보비 집중 투입</div>
+                  <div class="ac-desc">전환사채로 4억 투자유치. 홍보비 집중 투입, 1만명 이상 유입 목표. 무료 신고는 신뢰 문제로 보류, 유료 유지. 부가세 신고 완결성 확보 후 광고 3주 전부터 집행.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 향후 계획 -->
+        <div id="d0514-plan" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">→</div><h3>단기 계획</h3></div>
+            <div class="section-bd">
+              <div class="plan-card">
+                <div class="pc-label">1순위</div>
+                <div class="pc-title">메인 페이지 OX 내용 제거 + 공제/불공제 변경</div>
+                <div class="pc-desc">OX 기반 설명·영상·UI 전면 교체. 공제/불공제 버튼 방식으로 전환. 메인 페이지 개편.</div>
+              </div>
+              <div class="plan-card">
+                <div class="pc-label">2순위</div>
+                <div class="pc-title">레코드 완성 → 신고 테스트 (지방세 자동 처리 확인)</div>
+                <div class="pc-desc">레코드 등록 후 홈텍스 전자신고 테스트. 지방세가 자동 처리되는지 등록 과정에서 확인.</div>
+              </div>
+              <div class="plan-card">
+                <div class="pc-label">3순위</div>
+                <div class="pc-title">화물복지카드 중복 처리 작업</div>
+                <div class="pc-desc">이전 회의에서 보류됐던 화물복지카드 + 사업용신용카드 중복 건 처리 로직 구현.</div>
+              </div>
+              <div class="plan-card" style="border-left-color:#8e44ad;background:#f8f0ff">
+                <div class="pc-label" style="color:#7d3c98">추후</div>
+                <div class="pc-title">부동산 임대사업자 간주임대료 서식 추가</div>
+                <div class="pc-desc">부동산 임대공급가액 명세서 서식 필요. 보증금 수동 입력 처리. 부가세 오픈 이후 추가 작업.</div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">→</div><h3>일정 로드맵</h3></div>
+            <div class="section-bd">
+              <table>
+                <tr><th>기간</th><th>작업</th></tr>
+                <tr><td>6월</td><td>부가세 신고 오픈 + 대규모 홍보</td></tr>
+                <tr><td>7월</td><td>부가세 신고 마감 지원</td></tr>
+                <tr><td>8~10월</td><td>종합소득세 기능 재개·마무리</td></tr>
+                <tr><td>11월~</td><td>다음 부가세 시즌 준비</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- 셀프텍스 -->
+        <div id="d0514-selftax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num">1</div><h3>신고 흐름 — 레코드 → 전자신고</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">흐름</div>
+                <div class="topic-body">
+                  <div class="flow">
+                    <span class="flow-step">레코드 완성</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step">등록</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step">신고 테스트</span>
+                    <span class="flow-arrow">→</span>
+                    <span class="flow-step">지방세 확인</span>
+                  </div>
+                  <ul style="margin-top:8px">
+                    <li>기존 부가세와 동일 방식으로 등록 진행</li>
+                    <li>지방세: 홈텍스 등록 시 자동 처리 여부 확인 필요. 별도 설정 필요 시 추가 작업</li>
+                    <li>값이 맞는지 검증 후 신고 진행 (오차 시 반려될 수 있음)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num">2</div><h3>신규 사업자 데이터 수집 흐름</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">26년도 데이터만 수집</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>로그인 시 26년도 데이터만 자동 수집 (통신량·속도 개선)</li>
+                    <li>25년도 데이터: 필요 시 사용자가 별도 버튼으로 불러오기</li>
+                    <li>기존 사용자(25년도 데이터 보유자): 26년도부터 새로 수집, 이전 데이터 변경 불가</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note">종소세 기능 비활성화로 구사소득 수집도 함께 중단. Gemini 계정 분류 통신 시간 단축 효과.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num">3</div><h3>부동산 임대사업자 처리</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">간주임대료 서식</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>부동산 임대공급가액 명세서 서식 추가 필요</li>
+                    <li>보증금에 대한 부가세 과세(간주임대료) 처리</li>
+                    <li>보증금 금액은 사람이 직접 입력해야 함 (수동)</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="issue-box">부가세 오픈 이후 추가 개발 예정. 현재 미지원.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 원택스 -->
+        <div id="d0514-wontax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">1</div><h3>OX → 공제/불공제 변경</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">변경 범위</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>UI 버튼: OX → 공제/불공제 토글 버튼</li>
+                    <li>메인 페이지 설명 텍스트·영상: OX 기반 내용 전면 제거</li>
+                    <li>안내 문구: "최초 가입 시 입력 정보 기준으로 공제/불공제 자동 체크됩니다. 수정 필요 시 직접 검토 후 수정해 주세요."</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">2</div><h3>전자계산서 합계표 수집 기간 오류</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">기존 사용자 오류 원인</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>전자계산서 합계표는 반기마다 1회 수집</li>
+                    <li>기존 사용자는 이미 25년도 말까지 수집 완료 상태</li>
+                    <li>26년 상반기 것은 7월 11일 이후에야 수집 가능 → 현재 안받는 것으로 설정(2025.12.31 기준)</li>
+                    <li>결과: 기존 사용자에게 "미수신" 오류 지속 발생</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="issue-box">기간 계산 로직 수정 필요. 7월 이후 해소 예정.</div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">3</div><h3>신고유형 구분</h3></div>
+            <div class="section-bd">
+              <div class="topic">
+                <div class="topic-title">기장의무 분류</div>
+                <div class="topic-body">
+                  <ul>
+                    <li>간편장부: 비사업자 포함 해당</li>
+                    <li>복식부기(01코드): 현재 지원 제외 — 복잡도로 인해 제거</li>
+                    <li>비사업자·무사업자: 간편장부로 처리, 사업체 없으면 별도 처리</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="note">복식부기 의무자는 현재 시스템 범위 외. 간편장부 중심 운영.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 기타 의견 -->
+        <div id="d0514-other" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#7f8c8d">?</div><h3>기타 논의 내용</h3></div>
+            <div class="section-bd">
+              <div class="other-card">
+                <div class="oc-title">홍보 전략 — 전환사채 4억 투자, 1만명 목표</div>
+                <div class="oc-body">전환사채 약 4억 투자유치. 홍보비 집중 투입 예정. 1만명 이상 유입 목표. 무료 신고는 사용자 신뢰 문제(의구심) 우려로 유료 유지. 토스·3.3% 등 경쟁사가 모방할 가능성 있어 빠른 선점 중요.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">종소세 계산 오차 — 근로소득 미반영</div>
+                <div class="oc-body">셀프텍스로 돌렸을 때 마이너스 세금 발생. 원인: 근로소득이 반영되지 않아 종합소득이 낮게 계산됨. 국세청 기준(18~20만원)과 차이. 근로소득 포함 시 정상 계산 가능. 내년 종소세 개발 시 반영 필요.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">복식부기 의무자 — 현재 지원 불가</div>
+                <div class="oc-body">복식부기는 재무제표 수준의 복잡한 데이터 구조 필요. 현재 간편장부 중심 운영. 복식부기 의무자는 간편장부로 대체 처리되거나 지원 불가 안내 필요.</div>
+              </div>
+              <div class="other-card">
+                <div class="oc-title">찾아주세무사 경쟁 분석</div>
+                <div class="oc-body">찾아주세무사는 현재 트래픽 높으나 지속 여부 불투명. 셀프텍스가 종소세까지 자동화하면 세무사 15만원 대비 경쟁력 확보 가능. 시장 변화 속도가 빨라 빠른 선점이 중요.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /inner-panels -->
+    </div><!-- /meeting-card -->
+  </div><!-- /date-d0514 -->
 
   <div class="footer">셀프텍스 개발 회의록 · 자동 생성</div>
 
