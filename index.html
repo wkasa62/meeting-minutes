@@ -423,7 +423,10 @@
   </div>
   <div class="date-tabs-wrapper">
     <div class="date-tabs" id="dateTabs">
-      <button class="date-tab active" onclick="switchDate('d0601')">
+      <button class="date-tab active" onclick="switchDate('d0604')">
+        📅 6월 4일 <span class="date-badge">오후</span>
+      </button>
+      <button class="date-tab" onclick="switchDate('d0601')">
         📅 6월 1일 <span class="date-badge">오후</span>
       </button>
       <button class="date-tab" onclick="switchDate('d0522')">
@@ -2729,9 +2732,194 @@
   </div><!-- /date-d0508 -->
 
   <!-- ══════════════════════════════════════
+       날짜: 6월 4일 오후
+  ══════════════════════════════════════ -->
+  <div id="date-d0604" class="date-panel active">
+    <div class="meeting-card">
+
+      <div class="meeting-header">
+        <div class="mh-left">
+          <div class="mh-title">셀프텍스 개발 회의 — 오후</div>
+          <div class="mh-meta">📅 2026년 6월 4일 (오후)</div>
+          <div class="mh-sub">부동산 임대공급가액 명세서 신규/갱신/계속/퇴거 UI 방식 확정 · 임대료 검증 방식 · 전기 거 불러오기</div>
+        </div>
+      </div>
+
+      <div class="inner-tab-nav">
+        <button class="inner-tab-btn active" onclick="switchInner('d0604','decided')">
+          <span class="idot" style="background:#e74c3c"></span>결정 사항
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0604','plan')">
+          <span class="idot" style="background:#27ae60"></span>향후 계획
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0604','selftax')">
+          <span class="idot" style="background:#2980b9"></span>셀프텍스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0604','wontax')">
+          <span class="idot" style="background:#8e44ad"></span>원택스
+        </button>
+        <button class="inner-tab-btn" onclick="switchInner('d0604','other')">
+          <span class="idot" style="background:#7f8c8d"></span>기타 의견
+        </button>
+      </div>
+
+      <div class="inner-panels">
+
+        <!-- 결정 사항 -->
+        <div id="d0604-decided" class="inner-panel active">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>부동산 임대공급가액 명세서 4가지 케이스 처리 방식 확정</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🆕</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">확정</span>&nbsp; 신규: 팝업으로 입주일 필수 입력</div>
+                  <div class="ac-desc">추가하기 버튼 → 신규/갱신/계속/퇴거 선택 팝업 → 신규 선택 시 입주일 필수 입력. 갱신일 선택 불가. 과세기간 시작일(1월 1일)을 기본값으로 사용 불가, 실제 입주일 직접 입력.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🔄</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">확정</span>&nbsp; 계속: 전기 거 불러오기 후 그대로 표시</div>
+                  <div class="ac-desc">이전 과세기간 데이터를 임차인별로 불러와서 그대로 표시. 수정 가능하게 표시하며 변경 없이 그대로 신고 가능. 불러올 데이터 없으면 신규 추가.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">📝</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">확정</span>&nbsp; 갱신(계약변경): 갱신하기 버튼 → 팝업</div>
+                  <div class="ac-desc">갱신하기 버튼 클릭 → 팝업에서 갱신일 + 변경 후 보증금/월세만 입력. 기존 보증금/월세는 placeholder로 표시(누르면 지워짐). 위 줄 퇴거일 자동 설정 = 갱신일 - 1일.</div>
+                </div>
+              </div>
+              <div class="action-card">
+                <div class="ac-icon">🚪</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">확정</span>&nbsp; 퇴거: 퇴거일 필드 직접 입력</div>
+                  <div class="ac-desc">별도 팝업 없이 퇴거일 필드에 직접 입력. 안내 문구 추가: "퇴거한 경우 반드시 퇴거일을 넣어주세요". 갱신 후 퇴거 케이스도 갱신 처리 후 퇴거일 필드에 직접 입력.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>임대료 검증 방식 확정</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">✅</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">확정</span>&nbsp; 합계 검증만, 줄별 세부 검증 없음</div>
+                  <div class="ac-desc">세금계산서 합계와의 비교만 수행. 갱신으로 두 줄이 됐을 때 각 줄에 0 입력해도 오류 없음. 합계가 맞으면 레코드 오류 없음 확인. 단, 임차인 사업자번호 기준으로 계산서 합계를 가져와 비교.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#e74c3c">!</div><h3>기타 UI 결정사항</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🏠</div>
+                <div>
+                  <div class="ac-title"><span class="tag green">확정</span>&nbsp; 필수값: 동호수 하나만 필수, 나머지 선택</div>
+                  <div class="ac-desc">동호수는 임차인 구분에 필수. 보증금, 월세 등 나머지는 선택 입력.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 향후 계획 -->
+        <div id="d0604-plan" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">→</div><h3>부동산 임대공급가액 명세서 UI 개발</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🛠️</div>
+                <div>
+                  <div class="ac-title">신규/갱신/계속/퇴거 버튼 처리 방식 구현</div>
+                  <div class="ac-desc">전기 거 불러오기 후 4가지 케이스 버튼 표시. 갱신하기 팝업 (갱신일 + 변경 후 보증금/월세 입력). 퇴거일 필드 직접 입력 + 안내 문구. 신규 팝업 (입주일 필수 입력).</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#27ae60">→</div><h3>레코드 단수 차이 검증</h3></div>
+            <div class="section-bd">
+              <div class="action-card">
+                <div class="ac-icon">🔢</div>
+                <div>
+                  <div class="ac-title">개발 완료 후 의제매입세액·신용카드 발행세액 공제 산식 재검증</div>
+                  <div class="ac-desc">월별 합산 방식에서 발생하는 단수 차이 원인 파악. 신용카드 발행세액 공제(110분의 10 계산) 및 의제매입세액 공제 부분 재검토. 6개월 합산 계산 방식과 비교 검증.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 셀프텍스 -->
+        <div id="d0604-selftax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#2980b9">S</div><h3>부동산 임대공급가액 명세서 케이스별 UX</h3></div>
+            <div class="section-bd">
+              <ul class="disc-list">
+                <li><strong>계속</strong>: 전기 거 불러오기 → 수정 가능하게 표시, 변경 없으면 그대로 신고</li>
+                <li><strong>신규</strong>: 추가하기 팝업 → 입주일 필수 입력 (갱신일 선택 불가)</li>
+                <li><strong>갱신</strong>: 갱신하기 버튼 → 팝업(갱신일 + 변경 후 보증금/월세) → 위 줄 퇴거일 자동(갱신일-1일)</li>
+                <li><strong>퇴거</strong>: 퇴거일 필드 직접 입력 + "퇴거한 경우 반드시 퇴거일을 넣어주세요" 안내 문구</li>
+                <li>갱신 후 퇴거: 갱신으로 처리 후 퇴거일 필드 직접 입력</li>
+                <li>임차인이 여러 명일 경우 추가하기로 각각 등록 (101호, 102호 각각)</li>
+              </ul>
+            </div>
+          </div>
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#2980b9">S</div><h3>전기 거 불러오기 방식</h3></div>
+            <div class="section-bd">
+              <ul class="disc-list">
+                <li>임차인별로 줄 가져오기 (사업자번호 기준)</li>
+                <li>불러온 데이터는 수정 가능하게 표시</li>
+                <li>계속이면 그대로, 갱신/퇴거/신규이면 해당 케이스 버튼으로 처리</li>
+                <li>자동 채우기보다 수동 수정 허용 방식으로 처리 (자동화 시 검증 복잡성 문제)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 원택스 -->
+        <div id="d0604-wontax" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#8e44ad">W</div><h3>임대료 검증 및 세금계산서 합계 비교</h3></div>
+            <div class="section-bd">
+              <ul class="disc-list">
+                <li>임차인 사업자번호 기준으로 세금계산서 합계 가져와서 임대료 합계와 비교</li>
+                <li>갱신으로 줄이 두 개가 돼도 합계 검증만 수행, 줄별 세부 검증 없음</li>
+                <li>레코드 단수 차이: 신용카드 발행세액 공제(110분의 10 계산), 의제매입세액 공제에서 주로 발생</li>
+                <li>월별 합산 방식 vs 6개월 합산 방식 비교 검증 예정</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- 기타 의견 -->
+        <div id="d0604-other" class="inner-panel">
+          <div class="section">
+            <div class="section-hd"><div class="s-num" style="background:#7f8c8d">etc</div><h3>서식 용어 개선 논의</h3></div>
+            <div class="section-bd">
+              <ul class="disc-list">
+                <li>홈텍스 원래 서식 용어(입주일/갱신일/퇴거일)가 일반인에게 어렵고 혼란스러움</li>
+                <li>세입자별 월세·보증금 현황, 계약일 등 쉬운 용어로 변경 방향 논의</li>
+                <li>"계약일" 표현은 부동산 계약일과 혼동될 수 있어 주의 필요</li>
+                <li>우선 만들고 나서 용어 손보는 방향으로 진행</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /inner-panels -->
+    </div><!-- /meeting-card -->
+  </div><!-- /date-d0604 -->
+
+  <!-- ══════════════════════════════════════
        날짜: 6월 1일 오후
   ══════════════════════════════════════ -->
-  <div id="date-d0601" class="date-panel active">
+  <div id="date-d0601" class="date-panel">
     <div class="meeting-card">
 
       <div class="meeting-header">
